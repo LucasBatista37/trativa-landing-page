@@ -1,4 +1,5 @@
 export const SITE_URL = 'https://app.trativa.app';
+export const LANDING_URL = 'https://trativa.app';
 
 export const NAV_LINKS = [
   { label: 'Funcionalidades', href: '#features' },

@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS, SITE_URL } from '../../utils/constants';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const isSolid = location.pathname !== '/' || scrolled;
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -18,14 +20,18 @@ export default function Header() {
     setMobileOpen(false);
     if (href.startsWith('#')) {
       const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.location.href = `/${href}`;
+      }
     }
   };
 
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        isSolid
           ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100'
           : 'bg-transparent'
       }`}
@@ -43,20 +49,20 @@ export default function Header() {
             </svg>
           </div>
           <span className={`font-bold text-lg transition-colors duration-300 ${
-            scrolled ? 'text-gray-900' : 'text-white'
+            isSolid ? 'text-gray-900' : 'text-white'
           }`}>
             Trativa
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map(link => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
-                scrolled
+                isSolid
                   ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   : 'text-white/80 hover:text-white hover:bg-white/10'
               }`}
@@ -67,11 +73,11 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+        <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
           <a
             href={`${SITE_URL}/login`}
             className={`text-sm font-medium transition-colors duration-200 ${
-              scrolled ? 'text-gray-600 hover:text-gray-900' : 'text-white/80 hover:text-white'
+              isSolid ? 'text-gray-600 hover:text-gray-900' : 'text-white/80 hover:text-white'
             }`}
           >
             Entrar
@@ -86,8 +92,8 @@ export default function Header() {
 
         {/* Mobile hamburger */}
         <button
-          className={`md:hidden p-2 rounded-lg transition-colors ${
-            scrolled ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+          className={`lg:hidden p-2 rounded-lg transition-colors ${
+            isSolid ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/10'
           }`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
@@ -100,7 +106,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="md:hidden bg-white border-t border-gray-100 shadow-lg"
+            className="lg:hidden bg-white border-t border-gray-100 shadow-lg"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

@@ -8,27 +8,39 @@
   </url>
 
   <url>
-    <loc>https://trativa.app/privacidade</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <loc>https://trativa.app/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://trativa.app/termos</loc>
+    <loc>https://trativa.app/blog/organizar-leads-whatsapp-sem-perder-historico</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://trativa.app/cancelamento</loc>
+    <loc>https://trativa.app/blog/planilha-de-leads-vs-crm</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://trativa.app/reembolso</loc>
+    <loc>https://trativa.app/blog/pipeline-de-vendas-etapas-claras</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://trativa.app/blog/acompanhar-metas-de-vendas-sem-cobrancas-manuais</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://trativa.app/blog/leads-parados-como-identificar-gargalos</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
 </urlset>

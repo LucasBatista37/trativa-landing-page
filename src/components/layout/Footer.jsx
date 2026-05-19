@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { NAV_LINKS, SITE_URL } from '../../utils/constants';
+import { SITE_URL } from '../../utils/constants';
 
 const FOOTER_SECTIONS = [
   {
@@ -9,6 +9,7 @@ const FOOTER_SECTIONS = [
       { label: 'Integração WhatsApp', href: '#whatsapp' },
       { label: 'Como funciona', href: '#how-it-works' },
       { label: 'Planos e preços', href: '#pricing' },
+      { label: 'Blog', to: '/blog' },
     ],
   },
   {
@@ -38,7 +39,11 @@ export default function Footer() {
     if (href.startsWith('#')) {
       e.preventDefault();
       const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.location.href = `/${href}`;
+      }
     }
   };
 
@@ -71,13 +76,22 @@ export default function Footer() {
               <ul className="space-y-3">
                 {section.links.map(link => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleAnchorClick(e, link.href)}
-                      className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
-                    >
-                      {link.label}
-                    </a>
+                    {link.to ? (
+                      <Link
+                        to={link.to}
+                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleAnchorClick(e, link.href)}
+                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

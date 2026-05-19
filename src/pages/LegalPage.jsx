@@ -1,15 +1,28 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+
+const slugByTitle = {
+  'Política de Privacidade': '/privacidade',
+  'Termos de Uso': '/termos',
+  'Política de Cancelamento': '/cancelamento',
+  'Política de Reembolso': '/reembolso',
+};
 
 export default function LegalPage({ title, lastUpdated, children }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const path = slugByTitle[title] || '/';
+  const seoTitle = `${title} | Trativa`;
+  const description = `${title} da Trativa, CRM de leads para equipes comerciais brasileiras.`;
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden flex flex-col">
+      <SEO title={seoTitle} description={description} path={path} robots="noindex, follow" />
       <Header />
       <main className="flex-1 pt-24 pb-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">

@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import SEO from './components/SEO';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
@@ -9,14 +10,39 @@ import WhatsAppSection from './components/sections/WhatsAppSection';
 import HowItWorks from './components/sections/HowItWorks';
 import Pricing from './components/sections/Pricing';
 import FinalCTA from './components/sections/FinalCTA';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 import PrivacidadePage from './pages/legal/PrivacidadePage';
 import TermosPage from './pages/legal/TermosPage';
 import CancelamentoPage from './pages/legal/CancelamentoPage';
 import ReembolsoPage from './pages/legal/ReembolsoPage';
+import { LANDING_URL } from './utils/constants';
 
 function HomePage() {
+  const homeTitle = 'Trativa — CRM de Leads para Equipes Comerciais Brasileiras';
+  const homeDescription = 'Gerencie leads com pipeline visual, WhatsApp Business integrado, metas de vendas e relatórios completos. Teste grátis por 14 dias, sem cartão de crédito.';
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
+      <SEO
+        title={homeTitle}
+        description={homeDescription}
+        path="/"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'Trativa',
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          url: LANDING_URL,
+          description: homeDescription,
+          offers: {
+            '@type': 'Offer',
+            priceCurrency: 'BRL',
+            availability: 'https://schema.org/InStock',
+          },
+        }}
+      />
       <Header />
       <main>
         <Hero />
@@ -37,6 +63,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/blog/:slug" element={<BlogPostPage />} />
       <Route path="/privacidade" element={<PrivacidadePage />} />
       <Route path="/termos" element={<TermosPage />} />
       <Route path="/cancelamento" element={<CancelamentoPage />} />
