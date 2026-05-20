@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -67,7 +68,38 @@ const FEATURES = [
   { icon: '🔄', text: 'Atualizações automáticas incluídas' },
 ];
 
+const PLATFORM_LABELS = {
+  windows: 'Windows',
+  mac: 'macOS',
+  linux: 'Linux',
+  mobile: 'dispositivo móvel',
+};
+
+function getDetectedPlatform() {
+  if (typeof navigator === 'undefined') return null;
+
+  const userAgent = navigator.userAgent || '';
+  const platform = (navigator.userAgentData?.platform || navigator.platform || '').toLowerCase();
+  const isIPadOS = platform === 'macintel' && navigator.maxTouchPoints > 1;
+  const isMobile = /android|iphone|ipad|ipod|mobile/i.test(userAgent) || isIPadOS;
+
+  if (isMobile) return 'mobile';
+  if (/win/i.test(platform) || /windows/i.test(userAgent)) return 'windows';
+  if (/mac/i.test(platform) || /mac os x/i.test(userAgent)) return 'mac';
+  if (/linux|x11/i.test(platform) || /linux/i.test(userAgent)) return 'linux';
+
+  return null;
+}
+
 export default function DownloadPage() {
+  const [detectedPlatform, setDetectedPlatform] = useState(null);
+
+  useEffect(() => {
+    setDetectedPlatform(getDetectedPlatform());
+  }, []);
+
+  const detectedPlatformLabel = PLATFORM_LABELS[detectedPlatform];
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden flex flex-col">
       <SEO
@@ -90,47 +122,72 @@ export default function DownloadPage() {
           <p className="text-lg text-blue-100 max-w-xl mx-auto">
             Toda a potência do Trativa em um aplicativo instalável. Acesso mais rápido, notificações nativas e experiência profissional em qualquer sistema.
           </p>
+          {detectedPlatformLabel && (
+            <p className="mt-5 text-sm text-blue-100">
+              {detectedPlatform === 'mobile'
+                ? 'Você parece estar em um dispositivo móvel. Para instalar o app desktop, abra esta página no computador.'
+                : `Detectamos ${detectedPlatformLabel}. O download recomendado está destacado abaixo.`}
+            </p>
+          )}
         </div>
       </section>
 
       {/* Platform cards */}
       <section className="px-4 -mt-8 mb-16">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
-          {PLATFORMS.map((p) => (
-            <div key={p.id} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 flex flex-col">
-              <div className="flex items-center gap-3 mb-4">
-                {p.icon}
-                <div>
-                  <h2 className="font-bold text-gray-900">{p.name}</h2>
-                  <p className="text-xs text-gray-400">{p.requirement}</p>
+          {PLATFORMS.map((p) => {
+            const isDetected = detectedPlatform === p.id;
+
+            return (
+              <div
+                key={p.id}
+                className={`relative bg-white rounded-2xl p-6 flex flex-col transition-all duration-300 ${
+                  isDetected
+                    ? 'border-2 border-brand-500 shadow-xl shadow-brand-600/15 ring-4 ring-brand-50'
+                    : 'border border-gray-100 shadow-lg'
+                }`}
+              >
+                {isDetected && (
+                  <div className="absolute right-4 top-4 rounded-full bg-brand-600 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+                    Recomendado
+                  </div>
+                )}
+                <div className="flex items-center gap-3 mb-4">
+                  {p.icon}
+                  <div className={isDetected ? 'pr-24' : ''}>
+                    <h2 className="font-bold text-gray-900">{p.name}</h2>
+                    <p className="text-xs text-gray-400">{p.requirement}</p>
+                  </div>
                 </div>
+
+                <div className="flex flex-col gap-2 mb-3 mt-auto">
+                  {p.downloads.map((d) => (
+                    <a
+                      key={d.url}
+                      href={d.url}
+                      className={`block text-center text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors ${
+                        isDetected && d.primary
+                          ? 'bg-brand-700 hover:bg-brand-800 text-white shadow-lg shadow-brand-600/20'
+                          : d.primary
+                          ? 'bg-brand-600 hover:bg-brand-700 text-white'
+                          : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                      }`}
+                    >
+                      {d.label}
+                    </a>
+                  ))}
+                </div>
+
+                <p className="text-xs text-gray-400 text-center">{p.note}</p>
+
+                {p.warning && (
+                  <p className="mt-3 text-xs text-amber-600 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+                    ⚠️ {p.warning}
+                  </p>
+                )}
               </div>
-
-              <div className="flex flex-col gap-2 mb-3 mt-auto">
-                {p.downloads.map((d) => (
-                  <a
-                    key={d.url}
-                    href={d.url}
-                    className={`block text-center text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors ${
-                      d.primary
-                        ? 'bg-brand-600 hover:bg-brand-700 text-white'
-                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                    }`}
-                  >
-                    {d.label}
-                  </a>
-                ))}
-              </div>
-
-              <p className="text-xs text-gray-400 text-center">{p.note}</p>
-
-              {p.warning && (
-                <p className="mt-3 text-xs text-amber-600 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-                  ⚠️ {p.warning}
-                </p>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="text-center mt-5">

@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import SEO from './components/SEO';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -18,6 +19,18 @@ import CancelamentoPage from './pages/legal/CancelamentoPage';
 import ReembolsoPage from './pages/legal/ReembolsoPage';
 import DownloadPage from './pages/DownloadPage';
 import { LANDING_URL } from './utils/constants';
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0 });
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
 
 function HomePage() {
   const homeTitle = 'Trativa — CRM de Leads para Equipes Comerciais Brasileiras';
@@ -62,15 +75,20 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/blog" element={<BlogPage />} />
-      <Route path="/blog/:slug" element={<BlogPostPage />} />
-      <Route path="/privacidade" element={<PrivacidadePage />} />
-      <Route path="/termos" element={<TermosPage />} />
-      <Route path="/cancelamento" element={<CancelamentoPage />} />
-      <Route path="/reembolso" element={<ReembolsoPage />} />
-      <Route path="/download" element={<DownloadPage />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/privacidade" element={<PrivacidadePage />} />
+        <Route path="/termos" element={<TermosPage />} />
+        <Route path="/cancelamento" element={<CancelamentoPage />} />
+        <Route path="/reembolso" element={<ReembolsoPage />} />
+        <Route path="/download" element={<DownloadPage />} />
+        <Route path="/downloads" element={<Navigate to="/download" replace />} />
+        <Route path="/dowloads" element={<Navigate to="/download" replace />} />
+      </Routes>
+    </>
   );
 }

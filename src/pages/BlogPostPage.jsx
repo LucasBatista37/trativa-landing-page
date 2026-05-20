@@ -41,10 +41,10 @@ export default function BlogPostPage() {
         }}
       />
       <Header />
-      <main className="flex-1 pt-24 pb-20">
+      <main className="flex-1 pb-20">
         <article>
           <header className="border-b border-gray-100 bg-gray-50">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-32 sm:pt-36 pb-14 sm:pb-20">
               <div className="flex flex-wrap items-center gap-3 text-sm mb-8">
                 <Link to="/blog" className="text-brand-600 hover:text-brand-700 font-medium transition-colors">
                   ← Blog

@@ -30,9 +30,9 @@ export default function BlogPage() {
         }}
       />
       <Header />
-      <main className="flex-1 pt-24 pb-20">
+      <main className="flex-1 pb-20">
         <section className="border-b border-gray-100 bg-gray-50">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 sm:pt-36 pb-16 sm:pb-20">
             <Link
               to="/"
               className="inline-flex items-center text-sm text-brand-600 hover:text-brand-700 font-medium transition-colors mb-8"

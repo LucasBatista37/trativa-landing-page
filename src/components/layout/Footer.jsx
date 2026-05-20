@@ -36,6 +36,10 @@ const LEGAL_LINKS = [
 ];
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   const handleAnchorClick = (e, href) => {
     if (href.startsWith('#')) {
       e.preventDefault();
@@ -80,6 +84,7 @@ export default function Footer() {
                     {link.to ? (
                       <Link
                         to={link.to}
+                        onClick={scrollToTop}
                         className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
                       >
                         {link.label}
@@ -110,6 +115,7 @@ export default function Footer() {
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={scrollToTop}
                 className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
               >
                 {link.label}
