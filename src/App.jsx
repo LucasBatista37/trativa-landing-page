@@ -16,6 +16,7 @@ import PrivacidadePage from './pages/legal/PrivacidadePage';
 import TermosPage from './pages/legal/TermosPage';
 import CancelamentoPage from './pages/legal/CancelamentoPage';
 import ReembolsoPage from './pages/legal/ReembolsoPage';
+import DownloadPage from './pages/DownloadPage';
 import { LANDING_URL } from './utils/constants';
 
 function HomePage() {
@@ -69,6 +70,7 @@ export default function App() {
       <Route path="/termos" element={<TermosPage />} />
       <Route path="/cancelamento" element={<CancelamentoPage />} />
       <Route path="/reembolso" element={<ReembolsoPage />} />
+      <Route path="/download" element={<DownloadPage />} />
     </Routes>
   );
 }

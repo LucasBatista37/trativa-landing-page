@@ -10,6 +10,7 @@ const FOOTER_SECTIONS = [
       { label: 'Como funciona', href: '#how-it-works' },
       { label: 'Planos e preços', href: '#pricing' },
       { label: 'Blog', to: '/blog' },
+      { label: 'App Desktop', to: '/download' },
     ],
   },
   {
