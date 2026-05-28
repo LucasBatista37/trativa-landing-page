@@ -26,7 +26,7 @@ export default function Pricing() {
             Planos para cada tamanho de equipe
           </h2>
           <p className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto">
-            Comece com 14 dias gratuitos em qualquer plano. Sem cartão de crédito. Cancele quando quiser.
+            Comece com 30 dias gratuitos no plano Starter. Sem cartão de crédito. Cancele quando quiser.
           </p>
         </motion.div>
 
@@ -43,10 +43,10 @@ export default function Pricing() {
             </div>
             <div>
               <div className="text-white font-semibold text-sm sm:text-base">
-                14 dias de teste gratuito — sem cartão de crédito
+                30 dias de trial gratuito — sem cartão de crédito
               </div>
               <div className="text-blue-200 text-xs sm:text-sm mt-0.5">
-                Acesso completo a todas as funcionalidades do plano escolhido durante o período de trial.
+                30 dias do plano Starter, grátis. Sem cartão de crédito.
               </div>
             </div>
           </div>
