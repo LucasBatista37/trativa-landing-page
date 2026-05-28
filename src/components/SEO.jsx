@@ -37,6 +37,7 @@ export default function SEO({
   path = '/',
   type = 'website',
   robots = 'index, follow',
+  image = `${LANDING_URL}/og-trativa-simple-system.png`,
   jsonLd,
 }) {
   useEffect(() => {
@@ -52,15 +53,22 @@ export default function SEO({
     setMeta('meta[property="og:url"]', 'content', url);
     setMeta('meta[property="og:title"]', 'content', title);
     setMeta('meta[property="og:description"]', 'content', description);
+    setMeta('meta[property="og:image"]', 'content', image);
+    setMeta('meta[property="og:image:width"]', 'content', '1200');
+    setMeta('meta[property="og:image:height"]', 'content', '630');
+    setMeta('meta[property="og:image:type"]', 'content', 'image/png');
+    setMeta('meta[property="og:image:alt"]', 'content', 'Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real');
     setMeta('meta[property="og:site_name"]', 'content', 'Trativa');
     setMeta('meta[property="og:locale"]', 'content', 'pt_BR');
 
-    setMeta('meta[name="twitter:card"]', 'content', 'summary');
+    setMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
     setMeta('meta[name="twitter:title"]', 'content', title);
     setMeta('meta[name="twitter:description"]', 'content', description);
+    setMeta('meta[name="twitter:image"]', 'content', image);
+    setMeta('meta[name="twitter:image:alt"]', 'content', 'Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real');
 
     setJsonLd(jsonLd);
-  }, [description, jsonLd, path, robots, title, type]);
+  }, [description, image, jsonLd, path, robots, title, type]);
 
   return null;
 }
