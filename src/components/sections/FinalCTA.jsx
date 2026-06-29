@@ -54,7 +54,7 @@ export default function FinalCTA() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <a
               href={`${SITE_URL}/register`}
               className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-base px-8 py-4 rounded-xl transition-all hover:shadow-2xl hover:shadow-brand-600/30 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
@@ -67,6 +67,27 @@ export default function FinalCTA() {
               className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
             >
               Já tenho conta → Fazer login
+            </a>
+          </div>
+
+          {/* Google Play badge */}
+          <div className="flex justify-center mb-12">
+            <a
+              href="https://play.google.com/store/apps/details?id=app.trativa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-black hover:bg-gray-900 border border-white/15 text-white px-4 py-2.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40"
+            >
+              <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="none" aria-hidden="true">
+                <path d="M2.69 22.86c.43.29.92.29 1.34.05L16.43 15.15L13.34 12L2.69 22.86Z" fill="#34A853"/>
+                <path d="M21.46 10.55L18.31 8.75L14.92 12L18.31 15.25L21.46 13.45C22.38 12.95 22.38 11.05 21.46 10.55Z" fill="#FBBC04"/>
+                <path d="M2.1 1.85C2.04 2.03 2 2.21 2 2.42V21.58C2 21.79 2.04 21.97 2.1 22.15L13.1 12L2.1 1.85Z" fill="#4285F4"/>
+                <path d="M4.03 1.08C3.61 0.84 3.12 0.84 2.69 1.13L13.34 12L16.43 8.85L4.03 1.08Z" fill="#EA4335"/>
+              </svg>
+              <div className="flex flex-col leading-none text-left">
+                <span className="text-[10px] text-gray-400">Disponível no</span>
+                <span className="text-sm font-semibold">Google Play</span>
+              </div>
             </a>
           </div>
 
