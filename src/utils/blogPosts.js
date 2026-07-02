@@ -1,4 +1,119 @@
+import { SITE_URL } from './constants';
+
 export const BLOG_POSTS = [
+  {
+    slug: 'responder-lead-em-5-minutos',
+    category: 'Conversão',
+    readTime: '8 min',
+    title: 'Responder um lead em 5 minutos: por que a velocidade vale mais que o discurso de vendas',
+    excerpt:
+      'Dados mostram que a velocidade de resposta é um dos fatores que mais pesam na conversão. Veja onde a resposta lenta trava e como automatizar sem perder o toque humano.',
+    description:
+      'Descubra por que responder um lead em até 5 minutos multiplica a conversão e como automatizar a cadência sem perder o toque humano no atendimento.',
+    keywords: {
+      primary: 'tempo de resposta ao lead',
+      secondary: [
+        'responder lead rápido',
+        'follow-up automatizado',
+        'velocidade de atendimento comercial',
+        'cadência de vendas',
+        'leads esfriando',
+        'notificação de lead em tempo real',
+      ],
+    },
+    coverImage: '/blog/covers/tempo-resposta-lead.svg',
+    coverImageAlt:
+      'Cronômetro marcando 5 minutos ao lado de conversas de WhatsApp e um funil de vendas com etapas coloridas',
+    sections: [
+      {
+        heading: 'Por que a velocidade de resposta decide a venda antes da conversa começar',
+        paragraphs: [
+          'Um estudo amplamente citado da Harvard Business Review mostra que empresas que respondem a um lead na primeira hora têm sete vezes mais chance de qualificá-lo do que aquelas que demoram mais. Na prática, a maioria das pequenas empresas não chega perto disso: muitas levam horas, ou só respondem no dia seguinte.',
+          'Dados mais recentes do mercado brasileiro de vendas por WhatsApp reforçam o mesmo padrão: quanto mais rápida a primeira resposta, maior a chance de o lead seguir engajado no funil. O motivo é simples — o interesse de quem acabou de preencher um formulário ou mandar uma mensagem é o mais alto que ele terá em toda a jornada. Cada minuto de espera é interesse que se dissolve.',
+        ],
+        callout: {
+          stat: '9x',
+          label: 'Leads respondidos em até 5 minutos têm até 9 vezes mais chance de conversão do que leads respondidos depois desse intervalo.',
+        },
+      },
+      {
+        heading: 'Onde a resposta lenta normalmente trava',
+        paragraphs: [
+          'Na maioria dos casos, o atraso não é falta de vontade da equipe — é falta de processo. O lead entra em algum canal, mas ninguém é avisado no momento certo, ou ninguém sabe que aquele contato ainda não teve resposta.',
+        ],
+        checklist: true,
+        bullets: [
+          'O lead cai em um número de WhatsApp pessoal, sem visibilidade para o resto da equipe.',
+          'A notificação chega por e-mail e ninguém verifica a caixa de entrada em tempo real.',
+          'Não existe um responsável claro definido no momento em que o lead entra.',
+          'O vendedor só confere o CRM em horários fixos do dia, não quando o lead chega.',
+          'Não há um jeito rápido de ver quais leads novos ainda não foram respondidos.',
+        ],
+        cta: {
+          heading: 'Sua equipe sabe quanto tempo leva, em média, para responder um lead novo?',
+          text: 'O Trativa notifica em tempo real e mantém todo lead novo visível no pipeline até alguém assumir o atendimento.',
+          buttonLabel: 'Testar grátis por 14 dias',
+          buttonHref: `${SITE_URL}/register`,
+        },
+      },
+      {
+        heading: 'Automação de cadência sem perder o toque humano',
+        paragraphs: [
+          'A boa notícia é que resolver isso não depende de contratar mais gente. Operações comerciais de qualquer tamanho — de duas a duzentas pessoas — conseguem reduzir o tempo de resposta com automação de cadência: sequências de contato disparadas automaticamente assim que um lead entra, combinadas com notificação imediata para o responsável.',
+          'Times que adotam esse modelo relatam taxa de resposta entre 12% e 20%, contra 5% a 8% em operações sem automação. O ganho não vem de substituir o vendedor por um robô — vem de garantir que nenhum lead fique esperando enquanto ninguém percebe. Negociação de preço, contorno de objeção e fechamento continuam sendo trabalho humano; o que muda é a velocidade até esse humano entrar em cena.',
+        ],
+        image: {
+          src: '/blog/illustrations/velocidade-resposta-timeline.svg',
+          alt: 'Linha do tempo com quatro etapas: lead chega, notificação instantânea, cadência automática e fechamento humano',
+          caption: 'Cadência automatizada: do lead novo à primeira resposta em minutos — o fechamento continua humano.',
+        },
+      },
+      {
+        heading: 'Resposta manual vs. resposta com pipeline automatizado',
+        paragraphs: [
+          'A diferença entre os dois modelos fica clara quando comparada lado a lado.',
+        ],
+        table: {
+          caption: 'Comparação entre resposta manual e resposta com pipeline automatizado',
+          headers: ['Critério', 'Processo manual', 'Pipeline com notificação em tempo real'],
+          rows: [
+            ['Tempo médio até 1ª resposta', 'Horas, às vezes 1 dia', 'Minutos'],
+            ['Depende da memória do vendedor', 'Sim', 'Não — o sistema avisa'],
+            ['Visibilidade do gestor', 'Baixa, sob demanda', 'Em tempo real, por status'],
+            ['Taxa de resposta reportada', '5% a 8%', '12% a 20%'],
+            ['Rastreabilidade do atendimento', 'Depende de anotação manual', 'Histórico automático por lead'],
+          ],
+        },
+      },
+      {
+        heading: 'Como estruturar isso na prática',
+        paragraphs: [
+          'Não é preciso reformular todo o processo comercial de uma vez. O ganho já aparece com alguns ajustes simples e mensuráveis.',
+        ],
+        checklist: true,
+        bullets: [
+          'Defina um SLA interno: por exemplo, todo lead novo precisa de contato em até 5 minutos em horário comercial.',
+          'Ative notificações em tempo real para o responsável assim que um lead entra.',
+          'Mantenha todo lead novo em uma etapa visível do pipeline até alguém assumir o atendimento.',
+          'Meça o tempo médio de resposta por vendedor, não só o volume de leads atendidos.',
+          'Revise esse indicador semanalmente junto com a equipe, não apenas no fechamento do mês.',
+        ],
+      },
+      {
+        heading: 'Como o Trativa viabiliza a resposta rápida sem sobrecarregar a equipe',
+        paragraphs: [
+          'O Trativa foi pensado para que a velocidade de resposta não dependa de esforço extra da equipe. Notificações em tempo real avisam assim que um lead novo entra, a integração oficial com a WhatsApp Cloud API da Meta mantém a conversa dentro da própria plataforma — sem depender do celular pessoal de ninguém — e o pipeline visual deixa claro quais leads ainda estão na etapa "novo" e aguardando o primeiro contato.',
+          'Os relatórios completos, por status, origem e responsável, mostram exatamente onde o tempo de resposta está travando, para que o gestor corrija a rota antes de perder oportunidades que já estavam quentes.',
+        ],
+      },
+    ],
+    finalCta: {
+      heading: 'Descubra o tempo médio de resposta da sua equipe',
+      text: 'O Trativa notifica automaticamente cada lead novo, mantém o WhatsApp oficial integrado ao pipeline e mostra em relatórios quanto tempo sua equipe leva para responder.',
+      buttonLabel: 'Começar teste gratuito',
+    },
+    relatedSlugs: ['leads-parados-como-identificar-gargalos', 'organizar-leads-whatsapp-sem-perder-historico'],
+  },
   {
     slug: 'organizar-leads-whatsapp-sem-perder-historico',
     category: 'Atendimento',

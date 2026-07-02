@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1000 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="timeline-title timeline-desc">
+  <title id="timeline-title">Linha do tempo da cadência automatizada</title>
+  <desc id="timeline-desc">Quatro etapas: lead chega, notificação instantânea, cadência automática, fechamento humano</desc>
+  <defs>
+    <linearGradient id="line-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+
+  <line x1="90" y1="110" x2="910" y2="110" stroke="url(#line-accent)" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Step 1 -->
+  <g>
+    <circle cx="90" cy="110" r="34" fill="#eff6ff" stroke="#2563eb" stroke-width="3" />
+    <text x="90" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="26" fill="#2563eb">1</text>
+    <text x="90" y="70" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#94a3b8">0 min</text>
+    <text x="90" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="15" fill="#374151">Lead chega</text>
+  </g>
+
+  <!-- Step 2 -->
+  <g>
+    <circle cx="363" cy="110" r="34" fill="#eff6ff" stroke="#2563eb" stroke-width="3" />
+    <text x="363" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="26" fill="#2563eb">2</text>
+    <text x="363" y="70" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#94a3b8">&lt; 1 min</text>
+    <text x="363" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="15" fill="#374151">Notificação instantânea</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g>
+    <circle cx="636" cy="110" r="34" fill="#ecfdf5" stroke="#10b981" stroke-width="3" />
+    <text x="636" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="26" fill="#059669">3</text>
+    <text x="636" y="70" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#94a3b8">Minutos</text>
+    <text x="636" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="15" fill="#374151">Cadência automática</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g>
+    <circle cx="910" cy="110" r="34" fill="#ecfdf5" stroke="#10b981" stroke-width="3" />
+    <text x="910" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="26" fill="#059669">4</text>
+    <text x="910" y="70" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#94a3b8">Quando importa</text>
+    <text x="910" y="168" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="600" font-size="15" fill="#374151">Fechamento humano</text>
+  </g>
+</svg>

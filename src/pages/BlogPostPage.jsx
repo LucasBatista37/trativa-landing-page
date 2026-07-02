@@ -3,6 +3,11 @@ import { ArrowRight, Clock } from 'lucide-react';
 import SEO from '../components/SEO';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import Callout from '../components/blog/Callout';
+import ChecklistBlock from '../components/blog/ChecklistBlock';
+import ComparisonTable from '../components/blog/ComparisonTable';
+import InlineCTA from '../components/blog/InlineCTA';
+import RelatedPosts from '../components/blog/RelatedPosts';
 import { getBlogPostBySlug } from '../utils/blogPosts';
 import { LANDING_URL, SITE_URL } from '../utils/constants';
 
@@ -72,6 +77,19 @@ export default function BlogPostPage() {
             </div>
           </header>
 
+          {post.coverImage && (
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 sm:-mt-10">
+              <img
+                src={post.coverImage}
+                alt={post.coverImageAlt || post.title}
+                width={1200}
+                height={630}
+                loading="eager"
+                className="w-full rounded-2xl shadow-lg border border-gray-100 object-cover aspect-[1200/630]"
+              />
+            </div>
+          )}
+
           <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
             <div className="space-y-10">
               {post.sections.map((section) => (
@@ -86,7 +104,14 @@ export default function BlogPostPage() {
                       </p>
                     ))}
                   </div>
-                  {section.bullets && (
+
+                  {section.callout && <Callout {...section.callout} />}
+
+                  {section.bullets && section.checklist && (
+                    <ChecklistBlock items={section.bullets} />
+                  )}
+
+                  {section.bullets && !section.checklist && (
                     <ul className="mt-5 space-y-3">
                       {section.bullets.map((item) => (
                         <li key={item} className="flex gap-3 text-gray-600 leading-relaxed">
@@ -96,24 +121,47 @@ export default function BlogPostPage() {
                       ))}
                     </ul>
                   )}
+
+                  {section.table && <ComparisonTable {...section.table} />}
+
+                  {section.image && (
+                    <figure className="mt-6">
+                      <img
+                        src={section.image.src}
+                        alt={section.image.alt}
+                        loading="lazy"
+                        className="w-full rounded-2xl border border-gray-100 bg-gray-50"
+                      />
+                      {section.image.caption && (
+                        <figcaption className="mt-2.5 text-sm text-gray-400 text-center">
+                          {section.image.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  )}
+
+                  {section.cta && <InlineCTA {...section.cta} />}
                 </section>
               ))}
             </div>
 
+            <RelatedPosts currentSlug={post.slug} slugs={post.relatedSlugs} />
+
             <div className="mt-14 pt-10 border-t border-gray-100">
               <div className="rounded-2xl bg-gray-50 border border-gray-100 p-6 sm:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                  Organize esse processo no Trativa
+                  {post.finalCta?.heading || 'Organize esse processo no Trativa'}
                 </h2>
                 <p className="text-gray-500 leading-relaxed mb-6">
-                  Centralize leads, acompanhe etapas do funil, registre atendimentos e tenha mais clareza sobre a rotina comercial da sua equipe.
+                  {post.finalCta?.text ||
+                    'Centralize leads, acompanhe etapas do funil, registre atendimentos e tenha mais clareza sobre a rotina comercial da sua equipe.'}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a
                     href={`${SITE_URL}/register`}
                     className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-5 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-600/25"
                   >
-                    Começar teste gratuito
+                    {post.finalCta?.buttonLabel || 'Começar teste gratuito'}
                     <ArrowRight className="w-4 h-4" />
                   </a>
                   <Link

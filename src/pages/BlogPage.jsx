@@ -60,11 +60,24 @@ export default function BlogPage() {
               {BLOG_POSTS.map((post) => (
                 <article
                   key={post.slug}
-                  className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
+                  className="bg-white rounded-2xl border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group overflow-hidden flex flex-col"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5 group-hover:bg-brand-100 transition-colors">
-                    <FileText className="w-5 h-5" />
-                  </div>
+                  {post.coverImage ? (
+                    <Link to={`/blog/${post.slug}`} className="block">
+                      <img
+                        src={post.coverImage}
+                        alt={post.coverImageAlt || post.title}
+                        loading="lazy"
+                        className="w-full aspect-[1200/630] object-cover"
+                      />
+                    </Link>
+                  ) : null}
+                  <div className="p-6 flex flex-col flex-1">
+                  {!post.coverImage && (
+                    <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-5 group-hover:bg-brand-100 transition-colors">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                  )}
                   <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
                     <span className="font-semibold text-brand-600 uppercase tracking-wide">
                       {post.category}
@@ -84,11 +97,12 @@ export default function BlogPage() {
                   </p>
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 group-hover:text-brand-600 transition-colors"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 group-hover:text-brand-600 transition-colors mt-auto"
                   >
                     Ler artigo
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
+                  </div>
                 </article>
               ))}
             </div>
