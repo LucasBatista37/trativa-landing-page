@@ -78,7 +78,7 @@ export default function BlogPostPage() {
           </header>
 
           {post.coverImage && (
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 sm:-mt-10">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 -mt-8 sm:-mt-10">
               <img
                 src={post.coverImage}
                 alt={post.coverImageAlt || post.title}
