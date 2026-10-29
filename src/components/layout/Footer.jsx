@@ -5,12 +5,15 @@ const FOOTER_SECTIONS = [
   {
     title: 'Produto',
     links: [
-      { label: 'Funcionalidades', href: '#features' },
-      { label: 'Integração WhatsApp', href: '#whatsapp' },
+      { label: 'Conheça o produto', href: '#produto' },
       { label: 'Como funciona', href: '#how-it-works' },
+      { label: 'Integração WhatsApp', href: '#whatsapp' },
+      { label: 'Celular e computador', href: '#celular' },
       { label: 'Planos e preços', href: '#pricing' },
+      { label: 'Perguntas frequentes', href: '#faq' },
       { label: 'Blog', to: '/blog' },
-      { label: 'App Desktop', to: '/download' },
+      { label: 'App para computador', to: '/download' },
+      { label: 'App Android', href: 'https://play.google.com/store/apps/details?id=app.trativa' },
     ],
   },
   {
@@ -53,8 +56,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-950 text-gray-400">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-8">
+    <footer className="bg-ink text-gray-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-8">
 
         {/* Main grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
@@ -67,9 +70,9 @@ export default function Footer() {
                   <path d="M 8,6 L 32,6 Q 36,6 36,10 L 36,14 L 24,14 L 24,32 Q 24,36 20,36 Q 16,36 16,32 L 16,14 L 4,14 L 4,10 Q 4,6 8,6 Z"/>
                 </svg>
               </div>
-              <span className="text-white font-bold text-lg">Trativa</span>
+              <span className="font-display text-white font-bold text-lg tracking-tight">Trativa</span>
             </div>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-gray-400 leading-relaxed">
               CRM de leads feito para equipes comerciais brasileiras. Organize seus contatos, acompanhe o funil e feche mais negócios.
             </p>
           </div>
@@ -85,7 +88,7 @@ export default function Footer() {
                       <Link
                         to={link.to}
                         onClick={scrollToTop}
-                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
+                        className="text-sm text-gray-400 hover:text-white transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -93,7 +96,7 @@ export default function Footer() {
                       <a
                         href={link.href}
                         onClick={(e) => handleAnchorClick(e, link.href)}
-                        className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
+                        className="text-sm text-gray-400 hover:text-white transition-colors"
                       >
                         {link.label}
                       </a>
@@ -106,8 +109,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-600">
+        <div className="border-t border-ink-line pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-400">
             © 2026 Trativa. Todos os direitos reservados.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
@@ -116,7 +119,7 @@ export default function Footer() {
                 key={link.to}
                 to={link.to}
                 onClick={scrollToTop}
-                className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
+                className="text-xs text-gray-400 hover:text-gray-200 transition-colors"
               >
                 {link.label}
               </Link>

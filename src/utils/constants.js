@@ -1,11 +1,20 @@
 export const SITE_URL = 'https://app.trativa.app';
 export const LANDING_URL = 'https://trativa.app';
 
+// Duração real do teste: backend/src/utils/dateUtils.js (TRIAL_DAYS = 30)
+// e e-mail de boas-vindas ("seu trial de 30 dias começou").
+export const TRIAL_DAYS = 30;
+export const TRIAL_LINE = `${TRIAL_DAYS} dias grátis, sem cartão de crédito`;
+
+export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.trativa';
+
 export const NAV_LINKS = [
-  { label: 'Funcionalidades', href: '#features' },
-  { label: 'WhatsApp',        href: '#whatsapp' },
-  { label: 'Como funciona',   href: '#how-it-works' },
-  { label: 'Planos',          href: '#pricing' },
+  { label: 'Produto',       href: '#produto' },
+  { label: 'Como funciona', href: '#how-it-works' },
+  { label: 'WhatsApp',      href: '#whatsapp' },
+  { label: 'Celular',       href: '#celular' },
+  { label: 'Planos',        href: '#pricing' },
+  { label: 'Dúvidas',       href: '#faq' },
 ];
 
 // 9 status confirmados no modelo Lead e no formatters.js
@@ -21,59 +30,8 @@ export const PIPELINE_STAGES = [
   { key: 'perdido',          label: 'Perdido',          color: '#ef4444' },
 ];
 
-// 8 features reais confirmadas no código
-export const FEATURES = [
-  {
-    icon: 'Columns2',
-    color: 'text-blue-600 bg-blue-50',
-    title: 'Pipeline Kanban',
-    description: 'Arraste e solte leads entre as 9 etapas do funil. Visualize também em tabela ou cards, conforme sua preferência.',
-  },
-  {
-    icon: 'MessageSquare',
-    color: 'text-emerald-600 bg-emerald-50',
-    title: 'WhatsApp Oficial',
-    description: 'Integração via WhatsApp Cloud API da Meta. Envie e receba mensagens, use templates aprovados e controle a janela de serviço.',
-  },
-  {
-    icon: 'Sliders',
-    color: 'text-violet-600 bg-violet-50',
-    title: 'Campos Personalizados',
-    description: 'Adicione campos do tipo texto, número, moeda, data, seleção e mais. Adapte o CRM ao seu processo sem código.',
-  },
-  {
-    icon: 'Users',
-    color: 'text-orange-600 bg-orange-50',
-    title: 'Gestão de Equipe',
-    description: 'Três níveis de acesso: Proprietário, Administrador e Colaborador. Convide membros por e-mail e gerencie permissões.',
-  },
-  {
-    icon: 'Target',
-    color: 'text-rose-600 bg-rose-50',
-    title: 'Metas de Vendas',
-    description: 'Defina metas de leads convertidos, contatados, propostas e reuniões. Acompanhe o progresso por vendedor e período.',
-  },
-  {
-    icon: 'BarChart2',
-    color: 'text-indigo-600 bg-indigo-50',
-    title: 'Relatórios Completos',
-    description: 'Análises por status, origem, usuário e funil. Identifique gargalos, leads parados e evolução da taxa de conversão.',
-  },
-  {
-    icon: 'FileText',
-    color: 'text-teal-600 bg-teal-50',
-    title: 'Importação e Exportação',
-    description: 'Importe sua base de contatos em CSV com visualização prévia. Exporte seus dados a qualquer momento, sem restrições.',
-  },
-  {
-    icon: 'ShieldCheck',
-    color: 'text-gray-600 bg-gray-100',
-    title: 'Auditoria e Duplicatas',
-    description: 'Logs completos de todas as ações da equipe. Detecção automática de duplicatas por telefone, e-mail e Instagram.',
-  },
-];
-
-// Planos reais confirmados no Billing.jsx e modelo Organization (maxUsers, maxLeads)
+// Planos reais confirmados em frontend/src/pages/Billing.jsx (preços) e
+// backend/src/services/subscriptionService.js (PLAN_LIMITS: usuários, leads, metas, campos, projetos).
 export const PLANS = [
   {
     key: 'starter',
@@ -82,10 +40,11 @@ export const PLANS = [
     description: 'Para profissionais e autônomos',
     highlight: false,
     badge: null,
-    limits: '2 usuários · 200 leads',
+    limits: ['2 usuários', '200 leads'],
     features: [
       'Até 2 usuários',
       'Até 200 leads ativos',
+      'Até 3 projetos',
       'Pipeline visual com 9 etapas',
       'Visualizações kanban, tabela e cards',
       'Dashboard com métricas por status e origem',
@@ -105,10 +64,11 @@ export const PLANS = [
     description: 'Para pequenas equipes comerciais',
     highlight: false,
     badge: null,
-    limits: '3 usuários · 500 leads',
+    limits: ['3 usuários', '500 leads'],
     features: [
       'Até 3 usuários',
       'Até 500 leads ativos',
+      'Até 5 projetos',
       'Tudo do Starter',
       'Gestão de equipe com 3 níveis de acesso',
       'Convites por e-mail para novos membros',
@@ -124,11 +84,12 @@ export const PLANS = [
     price: 197,
     description: 'Para equipes em crescimento',
     highlight: true,
-    badge: 'Mais popular',
-    limits: '5 usuários · 2.000 leads',
+    badge: 'Recomendado',
+    limits: ['5 usuários', '2.000 leads'],
     features: [
       'Até 5 usuários',
       'Até 2.000 leads ativos',
+      'Projetos ilimitados',
       'Tudo do Básico',
       'WhatsApp Cloud API oficial',
       'Templates de mensagem WhatsApp',
@@ -144,7 +105,7 @@ export const PLANS = [
     description: 'Para operações de maior escala',
     highlight: false,
     badge: 'Mais completo',
-    limits: '20 usuários · leads ilimitados',
+    limits: ['20 usuários', 'Leads ilimitados'],
     features: [
       'Até 20 usuários',
       'Leads ilimitados',

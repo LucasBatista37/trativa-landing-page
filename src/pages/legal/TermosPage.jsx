@@ -23,7 +23,7 @@ export default function TermosPage() {
           <li><strong>Administrador:</strong> usuário com permissões ampliadas, convidado pelo proprietário</li>
           <li><strong>Colaborador:</strong> usuário com acesso operacional, convidado pelo proprietário ou administrador</li>
           <li><strong>Lead:</strong> contato comercial cadastrado pelo usuário na plataforma</li>
-          <li><strong>Trial:</strong> período de avaliação gratuita de 14 dias</li>
+          <li><strong>Trial:</strong> período de avaliação gratuita de 30 dias</li>
         </ul>
 
         <h2>3. Descrição do Serviço</h2>
@@ -99,7 +99,7 @@ export default function TermosPage() {
 
         <h2>11. Período de Avaliação Gratuita (Trial)</h2>
         <p>
-          Novos usuários têm 14 dias de acesso gratuito sem cartão de crédito. Ao término, sem contratação de plano pago, o acesso é suspenso. Não há cobrança automática ao término do trial.
+          Novos usuários têm 30 dias de acesso gratuito sem cartão de crédito. Ao término, sem contratação de plano pago, o acesso é suspenso. Não há cobrança automática ao término do trial.
         </p>
 
         <h2>12. Cancelamento</h2>

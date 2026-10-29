@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { NAV_LINKS, SITE_URL } from '../../utils/constants';
+import { NAV_LINKS, SITE_URL, TRIAL_DAYS } from '../../utils/constants';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,11 +17,13 @@ export default function Header() {
   }, []);
 
   const handleNavClick = (href) => {
+    const wasOpen = mobileOpen;
     setMobileOpen(false);
     if (href.startsWith('#')) {
       const el = document.querySelector(href);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        // no celular, espera a gaveta fechar para a rolagem não ser interrompida
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), wasOpen ? 240 : 0);
       } else {
         window.location.href = `/${href}`;
       }
@@ -39,7 +41,7 @@ export default function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
@@ -48,7 +50,7 @@ export default function Header() {
               <path d="M 8,6 L 32,6 Q 36,6 36,10 L 36,14 L 24,14 L 24,32 Q 24,36 20,36 Q 16,36 16,32 L 16,14 L 4,14 L 4,10 Q 4,6 8,6 Z"/>
             </svg>
           </div>
-          <span className={`font-bold text-lg transition-colors duration-300 ${
+          <span className={`font-display font-bold text-lg tracking-tight transition-colors duration-300 ${
             isSolid ? 'text-gray-900' : 'text-white'
           }`}>
             Trativa
@@ -61,7 +63,7 @@ export default function Header() {
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
                 isSolid
                   ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   : 'text-white/80 hover:text-white hover:bg-white/10'
@@ -96,7 +98,9 @@ export default function Header() {
             isSolid ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/10'
           }`}
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
+          aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="menu-mobile"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -106,6 +110,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="menu-mobile"
             className="lg:hidden bg-white border-t border-gray-100 shadow-lg"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -133,7 +138,7 @@ export default function Header() {
                   href={`${SITE_URL}/register`}
                   className="block text-center py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold rounded-lg transition-colors"
                 >
-                  Começar grátis — 14 dias
+                  {`Começar grátis — ${TRIAL_DAYS} dias`}
                 </a>
               </div>
             </div>

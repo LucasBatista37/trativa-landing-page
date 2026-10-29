@@ -67,7 +67,7 @@ export default function CancelamentoPage() {
 
         <h2>7. Cancelamento Durante o Trial Gratuito</h2>
         <ul>
-          <li>O trial de 14 dias pode ser encerrado a qualquer momento <strong>sem qualquer custo</strong></li>
+          <li>O trial de 30 dias pode ser encerrado a qualquer momento <strong>sem qualquer custo</strong></li>
           <li>Não há cobrança automática ao término do trial</li>
           <li>Se nenhum plano for contratado ao término, o acesso é suspenso sem cobrança</li>
         </ul>

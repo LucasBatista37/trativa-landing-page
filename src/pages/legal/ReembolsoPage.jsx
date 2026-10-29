@@ -11,7 +11,7 @@ export default function ReembolsoPage() {
 
         <h2>1. Período de Avaliação Gratuita</h2>
         <p>
-          O Trativa oferece <strong>14 dias de avaliação gratuita</strong> sem necessidade de cartão de crédito.
+          O Trativa oferece <strong>30 dias de avaliação gratuita</strong> sem necessidade de cartão de crédito.
         </p>
         <ul>
           <li>Nenhum valor é cobrado durante o trial</li>

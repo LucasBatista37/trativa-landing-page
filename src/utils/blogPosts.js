@@ -52,7 +52,7 @@ export const BLOG_POSTS = [
         cta: {
           heading: 'Sua equipe sabe quanto tempo leva, em média, para responder um lead novo?',
           text: 'O Trativa notifica em tempo real e mantém todo lead novo visível no pipeline até alguém assumir o atendimento.',
-          buttonLabel: 'Testar grátis por 14 dias',
+          buttonLabel: 'Testar grátis por 30 dias',
           buttonHref: `${SITE_URL}/register`,
         },
       },

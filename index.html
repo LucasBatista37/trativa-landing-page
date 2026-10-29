@@ -6,7 +6,7 @@
 
     <!-- Primary SEO -->
     <title>Trativa — CRM de Leads para Equipes Comerciais Brasileiras</title>
-    <meta name="description" content="Gerencie leads com pipeline visual, WhatsApp Business integrado, metas de vendas e relatórios completos. Teste grátis por 14 dias, sem cartão de crédito." />
+    <meta name="description" content="CRM de leads com pipeline Kanban de 9 etapas, WhatsApp oficial (Cloud API), metas, funil de vendas e app Android. Teste grátis por 30 dias, sem cartão de crédito." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://trativa.app/" />
 
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://trativa.app/" />
     <meta property="og:title" content="Trativa — CRM de Leads para Equipes Comerciais" />
-    <meta property="og:description" content="Pipeline Kanban, WhatsApp Cloud API oficial, campos personalizados e funil de vendas. Feito para pequenas empresas brasileiras." />
+    <meta property="og:description" content="Pipeline Kanban, WhatsApp Cloud API oficial, campos personalizados, funil de vendas e app Android. Teste grátis por 30 dias, sem cartão." />
     <meta property="og:image" content="https://trativa.app/og-trativa-simple-system.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -26,17 +26,23 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Trativa — CRM de Leads" />
-    <meta name="twitter:description" content="Gerencie leads, envie WhatsApp e acompanhe metas. Trial gratuito de 14 dias, sem cartão." />
+    <meta name="twitter:description" content="Gerencie leads, envie WhatsApp e acompanhe metas. Teste grátis por 30 dias, sem cartão." />
     <meta name="twitter:image" content="https://trativa.app/og-trativa-simple-system.png" />
     <meta name="twitter:image:alt" content="Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real" />
 
     <!-- Theme -->
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="theme-color" content="#0A1630" />
 
-    <!-- Inter font -->
+    <!-- Fontes: Bricolage Grotesque (títulos) + Inter (texto, a mesma família do app) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- carregamento sem bloquear a renderização (texto aparece com a fonte do sistema e troca em seguida) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap" /></noscript>
+
+    <!-- LCP: quadro inicial da gravação real do pipeline (desktop) -->
+    <link rel="preload" as="image" type="image/avif" href="/media/video/hero-kanban-poster.avif" media="(min-width: 768px)" fetchpriority="high" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

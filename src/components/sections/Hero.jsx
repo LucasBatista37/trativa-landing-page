@@ -1,271 +1,123 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-import { SITE_URL } from '../../utils/constants';
+import { PIPELINE_STAGES, TRIAL_DAYS } from '../../utils/constants';
+import { BrowserFrame, PhoneFrame } from '../media/Frames';
+import DemoVideo from '../media/DemoVideo';
+import Picture from '../media/Picture';
+import { VIDEOS } from '../media/media';
+import { useOpenDemo } from '../media/DemoContext';
+import { PrimaryCTA, DemoButton } from '../ui/Buttons';
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-};
-
-const mockupVariant = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] } },
-};
-
-const kanbanCols = [
-  { label: 'Novo',       color: '#3b82f6', count: 8,  cards: ['Empresa Alfa', 'João M.'] },
-  { label: 'Interessado',color: '#10b981', count: 5,  cards: ['Loja Digital', 'Studio X'] },
-  { label: 'Convertido', color: '#059669', count: 3,  cards: ['Tech Soluções'] },
-];
-
-function DashboardMockup() {
-  return (
-    <div className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 bg-[#0d1117]">
-
-      {/* Browser bar */}
-      <div className="bg-[#161b22] px-4 py-3 flex items-center gap-3 border-b border-white/5">
-        <div className="flex gap-1.5 flex-shrink-0">
-          <div className="w-3 h-3 rounded-full bg-red-400/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-          <div className="w-3 h-3 rounded-full bg-green-400/80" />
-        </div>
-        <div className="flex-1 bg-[#0d1117] rounded-md px-3 py-1.5 text-xs text-gray-500 flex items-center gap-2 min-w-0">
-          <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
-          <span className="truncate">app.trativa.com.br/leads</span>
-        </div>
-      </div>
-
-      {/* App body */}
-      <div className="flex" style={{ height: '320px' }}>
-
-        {/* Sidebar */}
-        <div className="w-40 bg-[#0a0e17] border-r border-white/5 flex flex-col p-3 flex-shrink-0">
-          <div className="flex items-center gap-2 px-2 py-2 mb-4">
-            <div className="w-6 h-6 bg-blue-600 rounded-md flex items-center justify-center flex-shrink-0">
-              <svg viewBox="0 0 40 40" className="w-3.5 h-3.5" fill="white" aria-hidden="true">
-                <path d="M 8,6 L 32,6 Q 36,6 36,10 L 36,14 L 24,14 L 24,32 Q 24,36 20,36 Q 16,36 16,32 L 16,14 L 4,14 L 4,10 Q 4,6 8,6 Z"/>
-              </svg>
-            </div>
-            <span className="text-white text-xs font-semibold">Trativa</span>
-          </div>
-          {[
-            { label: 'Dashboard', active: false, dot: '#6b7280' },
-            { label: 'Leads',     active: true,  dot: '#ffffff' },
-            { label: 'Funil',     active: false, dot: '#6b7280' },
-            { label: 'Metas',     active: false, dot: '#6b7280' },
-            { label: 'WhatsApp',  active: false, dot: '#6b7280' },
-            { label: 'Equipe',    active: false, dot: '#6b7280' },
-          ].map(nav => (
-            <div
-              key={nav.label}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg mb-0.5 text-[10px] font-medium transition-colors ${
-                nav.active ? 'bg-blue-600 text-white' : 'text-gray-500'
-              }`}
-            >
-              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: nav.dot }} />
-              {nav.label}
-            </div>
-          ))}
-        </div>
-
-        {/* Main content */}
-        <div className="flex-1 p-4 overflow-hidden flex flex-col">
-
-          {/* Header row */}
-          <div className="flex items-center justify-between mb-3 flex-shrink-0">
-            <div>
-              <div className="text-xs font-semibold text-white">Leads</div>
-              <div className="text-[10px] text-gray-500 mt-0.5">24 leads cadastrados</div>
-            </div>
-            <div className="bg-blue-600 text-white text-[10px] font-semibold px-3 py-1.5 rounded-lg flex-shrink-0">
-              + Cadastrar
-            </div>
-          </div>
-
-          {/* View toggle */}
-          <div className="flex gap-1 bg-[#161b22] p-1 rounded-lg mb-3 w-fit flex-shrink-0">
-            <div className="px-3 py-1 bg-white/10 rounded-md text-white text-[10px] font-medium">Kanban</div>
-            <div className="px-3 py-1 text-gray-500 text-[10px] font-medium">Tabela</div>
-            <div className="px-3 py-1 text-gray-500 text-[10px] font-medium">Cards</div>
-          </div>
-
-          {/* Kanban */}
-          <div className="flex gap-2 flex-1 overflow-hidden">
-            {kanbanCols.map(col => (
-              <div key={col.label} className="flex-shrink-0 w-[110px] flex flex-col">
-                <div className="flex items-center gap-1.5 mb-2">
-                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: col.color }} />
-                  <span className="text-[10px] text-gray-400 font-medium truncate">{col.label}</span>
-                  <span className="text-[10px] text-gray-600 ml-auto flex-shrink-0">{col.count}</span>
-                </div>
-                <div className="space-y-1.5">
-                  {col.cards.map(name => (
-                    <div
-                      key={name}
-                      className="bg-[#161b22] rounded-lg px-2.5 py-2 border border-white/5 cursor-pointer hover:border-white/10 transition-colors"
-                    >
-                      <div className="text-[10px] text-white font-medium truncate">{name}</div>
-                      <div className="flex items-center gap-1 mt-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />
-                        <span className="text-[9px] text-gray-600 truncate">WhatsApp</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-
-            {/* Remaining column ghost */}
-            <div className="flex-shrink-0 w-[110px]">
-              <div className="flex items-center gap-1.5 mb-2">
-                <div className="w-2 h-2 rounded-full bg-gray-700 flex-shrink-0" />
-                <span className="text-[10px] text-gray-600 font-medium">+ 6 etapas</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  );
-}
+const ease = [0.16, 1, 0.3, 1];
 
 export default function Hero() {
-  const scrollToHowItWorks = () => {
-    const el = document.querySelector('#how-it-works');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const openDemo = useOpenDemo();
 
   return (
-    <section className="relative bg-hero-gradient min-h-screen flex flex-col justify-center overflow-hidden">
-
-      {/* Dot grid texture */}
-      <div className="absolute inset-0 grid-dots pointer-events-none" />
-
-      {/* Radial glow behind mockup */}
+    <section className="relative overflow-hidden bg-ink text-white" aria-labelledby="hero-title">
+      <div className="hero-dots pointer-events-none absolute inset-0" aria-hidden="true" />
       <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
+        className="pointer-events-none absolute -top-40 right-[-10%] h-[620px] w-[620px] rounded-full opacity-60 blur-3xl"
+        style={{ background: 'radial-gradient(circle, rgba(37,99,235,0.35) 0%, transparent 65%)' }}
+        aria-hidden="true"
       />
+      {/* faixa clara no rodapé: o palco do produto atravessa para a próxima seção */}
+      <div className="absolute inset-x-0 bottom-0 h-[18%] bg-paper sm:h-[22%] lg:h-[26%]" aria-hidden="true" />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20 lg:pt-32 lg:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* Left — text */}
-          <motion.div variants={container} initial="hidden" animate="show">
-
-            {/* Badge */}
-            <motion.div variants={item} className="inline-flex items-center gap-2 mb-6">
-              <span className="inline-flex items-center gap-1.5 bg-white/8 border border-white/15 text-blue-300 text-xs font-medium px-3 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse-slow" />
-                CRM para equipes comerciais brasileiras
-              </span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1 variants={item} className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight text-white mb-6">
-              Organize seus leads.{' '}
-              <span className="text-gradient block">Feche mais negócios.</span>
-            </motion.h1>
-
-            {/* Sub */}
-            <motion.p variants={item} className="text-base sm:text-lg text-gray-400 leading-relaxed mb-8 max-w-xl">
-              Trativa centraliza seus contatos, atendimentos e oportunidades comerciais em um só lugar — com pipeline visual, WhatsApp integrado e relatórios em tempo real.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div variants={item} className="flex flex-col sm:flex-row gap-3 mb-6">
-              <a
-                href={`${SITE_URL}/register`}
-                className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl transition-all hover:shadow-xl hover:shadow-brand-600/30 hover:-translate-y-0.5 text-sm sm:text-base"
-              >
-                Começar gratuitamente
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <button
-                onClick={scrollToHowItWorks}
-                className="inline-flex items-center justify-center gap-2 border border-white/20 text-white/80 hover:text-white hover:border-white/40 font-medium px-6 py-3.5 rounded-xl transition-all text-sm sm:text-base"
-              >
-                Ver como funciona
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </motion.div>
-
-            {/* Trust line */}
-            <motion.p variants={item} className="text-xs text-gray-600 mb-4">
-              14 dias de teste gratuito · Sem necessidade de cartão de crédito
-            </motion.p>
-
-            {/* Google Play badge */}
-            <motion.div variants={item}>
-              <a
-                href="https://play.google.com/store/apps/details?id=app.trativa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-black hover:bg-gray-900 border border-white/15 text-white px-4 py-2.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40"
-              >
-                <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="none" aria-hidden="true">
-                  <path d="M2.69 22.86c.43.29.92.29 1.34.05L16.43 15.15L13.34 12L2.69 22.86Z" fill="#34A853"/>
-                  <path d="M21.46 10.55L18.31 8.75L14.92 12L18.31 15.25L21.46 13.45C22.38 12.95 22.38 11.05 21.46 10.55Z" fill="#FBBC04"/>
-                  <path d="M2.1 1.85C2.04 2.03 2 2.21 2 2.42V21.58C2 21.79 2.04 21.97 2.1 22.15L13.1 12L2.1 1.85Z" fill="#4285F4"/>
-                  <path d="M4.03 1.08C3.61 0.84 3.12 0.84 2.69 1.13L13.34 12L16.43 8.85L4.03 1.08Z" fill="#EA4335"/>
-                </svg>
-                <div className="flex flex-col leading-none">
-                  <span className="text-[10px] text-gray-400">Disponível no</span>
-                  <span className="text-sm font-semibold">Google Play</span>
-                </div>
-              </a>
-            </motion.div>
-
-          </motion.div>
-
-          {/* Right — mockup */}
-          <motion.div
-            variants={mockupVariant}
-            initial="hidden"
-            animate="show"
-            className="relative"
-            style={{ perspective: '1200px' }}
+      <div className="relative mx-auto max-w-7xl px-4 pt-28 sm:px-6 lg:pt-36">
+        <div className="grid gap-8 xl:grid-cols-12 xl:items-end xl:gap-10">
+          <motion.h1
+            id="hero-title"
+            initial={{ y: 14 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.7, ease }}
+            className="text-balance font-display text-[2.55rem] font-bold leading-[1.02] tracking-[-0.025em] sm:text-6xl lg:text-[4.4rem] xl:col-span-7 xl:text-[4.6rem]"
           >
-            <DashboardMockup />
+            Seus leads organizados. Suas vendas em movimento.
+          </motion.h1>
 
-            {/* Floating badge 1 */}
-            <motion.div
-              className="absolute -left-4 top-8 glass rounded-xl px-3 py-2 shadow-xl hidden lg:flex items-center gap-2"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
-              <span className="text-white text-xs font-medium whitespace-nowrap">Lead convertido</span>
-            </motion.div>
-
-            {/* Floating badge 2 */}
-            <motion.div
-              className="absolute -right-2 bottom-10 glass rounded-xl px-3 py-2 shadow-xl hidden lg:flex items-center gap-2"
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            >
-              <div className="w-2 h-2 rounded-full bg-blue-400 flex-shrink-0" />
-              <span className="text-white text-xs font-medium whitespace-nowrap">WhatsApp conectado</span>
-            </motion.div>
+          <motion.div
+            initial={{ y: 14 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease }}
+            className="max-w-2xl xl:col-span-5 xl:pb-2"
+          >
+            <p className="text-pretty text-base leading-relaxed text-white/70 sm:text-lg">
+              O Trativa é um CRM para equipes comerciais: cada lead tem etapa, responsável e
+              histórico, a conversa de WhatsApp fica na ficha e o funil mostra onde as vendas travam.
+              No navegador, no computador e no app Android.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <PrimaryCTA />
+              <DemoButton onClick={openDemo} />
+            </div>
+            <p className="mt-4 text-sm text-white/50">
+              Teste por {TRIAL_DAYS} dias sem cartão de crédito.
+            </p>
           </motion.div>
-
         </div>
-      </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        {/* As 9 etapas reais do funil, nas mesmas cores do app */}
+        <motion.ol
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="no-scrollbar mt-12 hidden gap-x-5 gap-y-2 overflow-x-auto text-[13px] text-white/60 md:flex md:flex-wrap"
+          aria-label="Etapas do funil no Trativa"
+        >
+          {PIPELINE_STAGES.map((s) => (
+            <li key={s.key} className="flex items-center gap-2 whitespace-nowrap">
+              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: s.color }} aria-hidden="true" />
+              {s.label}
+            </li>
+          ))}
+        </motion.ol>
+
+        {/* Palco do produto */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, delay: 0.25, ease }}
+          className="relative mt-10 pb-10 md:mt-5 lg:pb-16"
+        >
+          {/* tablet e desktop: pipeline real em vídeo + app Android em primeiro plano */}
+          <div className="relative hidden md:block">
+            <div className="mr-[13%] lg:mr-[12%]">
+              <BrowserFrame dark url="app.trativa.app/leads">
+                <DemoVideo video={VIDEOS.heroKanban} priority />
+              </BrowserFrame>
+            </div>
+            <div className="absolute bottom-[-4%] right-0 w-[22%] max-w-[270px]">
+              <PhoneFrame>
+                <Picture
+                  name="m-lead"
+                  mobile
+                  priority
+                  sizes="270px"
+                  alt="Ficha de um lead no app Android do Trativa, com etapa, botão de WhatsApp e dados de contato"
+                />
+              </PhoneFrame>
+            </div>
+          </div>
+
+          {/* celular: o app Android em destaque, com o pipeline desktop ao fundo */}
+          <div className="relative mx-auto max-w-[400px] md:hidden">
+            <div className="absolute left-[-12%] top-[8%] w-[92%] opacity-90" aria-hidden="true">
+              <BrowserFrame dark url="app.trativa.app/leads">
+                <Picture name="leads-kanban" sizes="360px" alt="" />
+              </BrowserFrame>
+            </div>
+            <div className="relative ml-auto mr-[4%] w-[62%]">
+              <PhoneFrame>
+                <DemoVideo video={VIDEOS.celular} priority rounded="rounded-[2rem]" />
+              </PhoneFrame>
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-xs text-gray-500 md:text-right">
+            Gravações e telas reais do Trativa, com dados fictícios de demonstração.
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }

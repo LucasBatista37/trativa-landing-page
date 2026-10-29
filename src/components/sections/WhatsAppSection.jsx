@@ -1,185 +1,76 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { MessageSquare, FileText, Clock, Zap, ArrowRight } from 'lucide-react';
-import { SITE_URL } from '../../utils/constants';
+import { MessageSquare, FileText, Clock, UserPlus, BellRing, Send } from 'lucide-react';
+import { BrowserFrame } from '../media/Frames';
+import DemoVideo from '../media/DemoVideo';
+import Picture from '../media/Picture';
+import { VIDEOS } from '../media/media';
 
-const waFeatures = [
-  {
-    Icon: MessageSquare,
-    text: 'Envio e recebimento de mensagens em tempo real, diretamente no CRM',
-  },
-  {
-    Icon: FileText,
-    text: 'Templates de mensagem aprovados pela Meta, reutilizáveis com variáveis dinâmicas',
-  },
-  {
-    Icon: Clock,
-    text: 'Controle da janela de serviço de 24 horas e rastreamento de conversas por lead',
-  },
-  {
-    Icon: Zap,
-    text: 'Criação automática de lead quando um novo contato envia mensagem para o número',
-  },
+// Recursos confirmados em backend/src/services/whatsapp*.js e na ficha do lead.
+const features = [
+  { Icon: MessageSquare, text: 'Mensagens enviadas e recebidas aparecem na ficha do lead, na ordem da conversa' },
+  { Icon: UserPlus, text: 'Quem escreve para o seu número pela primeira vez vira lead automaticamente' },
+  { Icon: FileText, text: 'Templates aprovados pela Meta, com variáveis como nome do contato e da empresa' },
+  { Icon: Clock, text: 'Controle da janela de atendimento de 24 horas, para saber quando é preciso usar template' },
+  { Icon: BellRing, text: 'Follow-ups agendados e aviso de nova mensagem nas notificações' },
+  { Icon: Send, text: 'Contato em lote para uma lista filtrada de leads' },
 ];
-
-const chatMessages = [
-  {
-    direction: 'in',
-    text: 'Oi! Vi o anúncio e tenho interesse. Vocês atendem minha região?',
-    time: '10:14',
-  },
-  {
-    direction: 'out',
-    text: 'Olá! Obrigado pelo contato 😊 Sim, atendemos toda a região. Pode me contar um pouco mais sobre o que você precisa?',
-    time: '10:16',
-    status: '✓✓',
-  },
-  {
-    direction: 'in',
-    text: 'Preciso de um orçamento para 5 unidades.',
-    time: '10:18',
-  },
-  {
-    direction: 'out',
-    text: 'Perfeito! Já vou preparar o orçamento.',
-    time: '10:19',
-    status: '✓✓',
-    template: true,
-  },
-];
-
-function PhoneMockup() {
-  return (
-    <div
-      className="w-60 mx-auto rounded-[2.25rem] overflow-hidden shadow-2xl ring-1 ring-white/20"
-      style={{ background: '#0d1c11' }}
-    >
-      {/* Status bar */}
-      <div className="bg-[#075e54] px-4 pt-3 pb-3">
-        <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-full bg-green-400/30 flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-[10px] font-bold">JM</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="text-white text-xs font-semibold truncate">João M. — Lead</div>
-            <div className="text-green-300 text-[10px]">online</div>
-          </div>
-          <div className="text-white/40 text-[10px] flex-shrink-0">via Trativa</div>
-        </div>
-      </div>
-
-      {/* Chat area */}
-      <div className="px-3 py-3 space-y-2.5 min-h-[280px]">
-        {chatMessages.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex ${msg.direction === 'out' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div
-              className={`max-w-[85%] rounded-2xl px-3 py-2 ${
-                msg.direction === 'out'
-                  ? 'rounded-tr-sm bg-[#005c4b]'
-                  : 'rounded-tl-sm bg-[#202d33]'
-              }`}
-            >
-              <p className="text-white text-[11px] leading-relaxed">{msg.text}</p>
-              {msg.template && (
-                <div className="flex items-center gap-1 mt-1 pt-1 border-t border-white/10">
-                  <FileText className="w-2.5 h-2.5 text-white/40" />
-                  <span className="text-[9px] text-white/40">Modelo enviado</span>
-                </div>
-              )}
-              <div className={`flex items-center gap-1 mt-1 ${msg.direction === 'out' ? 'justify-end' : 'justify-start'}`}>
-                <span className="text-[9px] text-white/30">{msg.time}</span>
-                {msg.status && (
-                  <span className="text-[9px] text-blue-300">{msg.status}</span>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Input bar */}
-      <div className="bg-[#1f2c34] px-3 py-2.5 flex items-center gap-2">
-        <div className="flex-1 bg-[#2a3942] rounded-full px-3 py-1.5">
-          <span className="text-gray-500 text-[10px]">Mensagem...</span>
-        </div>
-        <div className="w-7 h-7 rounded-full bg-[#00a884] flex items-center justify-center flex-shrink-0">
-          <ArrowRight className="w-3.5 h-3.5 text-white" />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function WhatsAppSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
   return (
-    <section id="whatsapp" className="py-20 sm:py-28 bg-wa-gradient relative overflow-hidden">
-
-      {/* Subtle pattern */}
-      <div className="absolute inset-0 grid-dots opacity-30 pointer-events-none" />
-
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* Left — text */}
-          <motion.div
-            initial={{ opacity: 0, x: -32 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="inline-flex items-center gap-2 bg-white/15 border border-white/20 text-green-200 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 uppercase tracking-widest">
-              Integração Oficial
-            </span>
-
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 leading-tight">
-              WhatsApp Business no centro do seu processo de vendas
-            </h2>
-
-            <p className="text-base text-green-100/80 leading-relaxed mb-8">
-              Conecte seu número ao Trativa via WhatsApp Cloud API da Meta. Envie mensagens, use templates aprovados, receba respostas e gerencie tudo diretamente no CRM — sem precisar trocar de aplicativo.
+    <section id="whatsapp" className="scroll-mt-16 relative overflow-hidden bg-wa py-20 text-white sm:py-28" aria-labelledby="whatsapp-titulo">
+      <div
+        className="pointer-events-none absolute -left-40 top-1/3 h-[520px] w-[520px] rounded-full opacity-40 blur-3xl"
+        style={{ background: 'radial-gradient(circle, rgba(37,211,102,0.35) 0%, transparent 65%)' }}
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-14">
+          <div className="min-w-0 lg:col-span-5">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-white/85 ring-1 ring-white/15">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" aria-hidden="true" />
+              WhatsApp Cloud API oficial da Meta
             </p>
-
-            <ul className="space-y-4 mb-8">
-              {waFeatures.map((feat, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-start gap-3"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <feat.Icon className="w-4 h-4 text-green-300" />
-                  </div>
-                  <span className="text-sm text-green-100/90 leading-relaxed">{feat.text}</span>
-                </motion.li>
+            <h2 id="whatsapp-titulo" className="mt-5 text-balance font-display text-3xl font-bold tracking-tight sm:text-[2.75rem] sm:leading-[1.08]">
+              O WhatsApp da empresa, dentro do processo de vendas
+            </h2>
+            <p className="mt-4 text-pretty leading-relaxed text-white/75 sm:text-lg">
+              Conecte o número oficial da empresa e pare de depender do celular de cada vendedor. A
+              conversa fica registrada no lead, junto com a etapa e o histórico.
+            </p>
+            <ul className="mt-8 space-y-4">
+              {features.map(({ Icon, text }) => (
+                <li key={text} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-white/10">
+                    <Icon className="h-4 w-4 text-[#7BE3A4]" aria-hidden="true" />
+                  </span>
+                  <span className="text-[15px] leading-relaxed text-white/90">{text}</span>
+                </li>
               ))}
             </ul>
+            <p className="mt-8 text-sm text-white/80">
+              Incluído nos planos Pro e Business. Requer um número conectado à WhatsApp Business Platform
+              da Meta.
+            </p>
+          </div>
 
-            <a
-              href={`${SITE_URL}/register`}
-              className="inline-flex items-center gap-2 bg-white text-emerald-800 font-semibold text-sm px-5 py-3 rounded-xl hover:bg-green-50 transition-all hover:shadow-lg hover:-translate-y-0.5"
-            >
-              Conhecer a integração
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </motion.div>
-
-          {/* Right — phone mockup */}
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center lg:justify-end"
-          >
-            <PhoneMockup />
-          </motion.div>
-
+          <div className="relative min-w-0 lg:col-span-7">
+            <BrowserFrame url="app.trativa.app/leads/mercado-bom-preco" className="shadow-frame">
+              <DemoVideo video={VIDEOS.whatsapp} />
+            </BrowserFrame>
+            <div className="mt-6 grid grid-cols-2 gap-4 sm:gap-6">
+              <figure className="min-w-0">
+                <BrowserFrame url="app.trativa.app/modelos">
+                  <Picture name="modelos-whatsapp" sizes="(min-width: 1024px) 330px, 50vw" alt="Lista de modelos de mensagem de WhatsApp no Trativa, com variáveis e contagem de uso" />
+                </BrowserFrame>
+                <figcaption className="mt-2 text-sm text-white/85">Modelos de mensagem com variáveis</figcaption>
+              </figure>
+              <figure className="min-w-0">
+                <BrowserFrame url="app.trativa.app/leads">
+                  <Picture name="contato-em-lote" sizes="(min-width: 1024px) 330px, 50vw" alt="Janela de contato em lote via WhatsApp no Trativa, com leads filtrados e selecionáveis" />
+                </BrowserFrame>
+                <figcaption className="mt-2 text-sm text-white/85">Contato em lote para leads filtrados</figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </div>
     </section>
