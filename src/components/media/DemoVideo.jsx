@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Pause, Play } from 'lucide-react';
 
+import { t } from '../../i18n';
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -140,7 +141,7 @@ export default function DemoVideo({
           type="button"
           onClick={toggle}
           className="absolute bottom-3 right-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink/75 text-white shadow-lg backdrop-blur transition hover:bg-ink focus-visible:outline-white"
-          aria-label={playing ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+          aria-label={playing ? t('Pausar vídeo') : t('Reproduzir vídeo')}
         >
           {playing ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Play className="h-4 w-4 translate-x-px" aria-hidden="true" />}
         </button>

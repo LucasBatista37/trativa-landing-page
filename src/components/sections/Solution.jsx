@@ -3,10 +3,11 @@ import { motion, useInView } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { PIPELINE_STAGES } from '../../utils/constants';
 
+import { t } from '../../i18n';
 const benefits = [
-  'Pipeline visual com as 9 etapas do funil de vendas — do primeiro contato à conversão',
-  'WhatsApp Business com API oficial da Meta: envie e receba mensagens diretamente no CRM',
-  'Relatórios em tempo real para tomar decisões com dados reais, não suposições',
+  t('Pipeline visual com as 9 etapas do funil de vendas — do primeiro contato à conversão'),
+  t('WhatsApp Business com API oficial da Meta: envie e receba mensagens diretamente no CRM'),
+  t('Relatórios em tempo real para tomar decisões com dados reais, não suposições'),
 ];
 
 export default function Solution() {
@@ -28,13 +29,13 @@ export default function Solution() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="inline-block text-xs font-semibold tracking-widest text-brand-600 uppercase mb-4">
-              A solução
+              {t('A solução')}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-5 leading-tight">
-              Um sistema de gestão de leads feito para a realidade brasileira
+              {t('Um sistema de gestão de leads feito para a realidade brasileira')}
             </h2>
             <p className="text-base text-gray-500 leading-relaxed mb-8">
-              Diferente de sistemas genéricos, o Trativa foi construído com o processo comercial brasileiro em mente — com WhatsApp integrado de verdade e um pipeline que reflete como equipes de vendas trabalham no Brasil.
+              {t('Diferente de sistemas genéricos, o Trativa foi construído com o processo comercial brasileiro em mente — com WhatsApp integrado de verdade e um pipeline que reflete como equipes de vendas trabalham no Brasil.')}
             </p>
 
             <ul className="space-y-4">
@@ -64,7 +65,7 @@ export default function Solution() {
             className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
           >
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-5">
-              Pipeline de vendas — 9 etapas
+              {t('Pipeline de vendas — 9 etapas')}
             </p>
             <div className="space-y-2.5">
               {PIPELINE_STAGES.map((stage, i) => (
@@ -104,7 +105,7 @@ export default function Solution() {
             </div>
 
             <p className="text-xs text-gray-500 mt-6">
-              Cada etapa reflete uma ação real do processo comercial — sem confusão sobre onde cada oportunidade está.
+              {t('Cada etapa reflete uma ação real do processo comercial — sem confusão sobre onde cada oportunidade está.')}
             </p>
           </motion.div>
 

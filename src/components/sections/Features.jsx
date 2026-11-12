@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { FEATURES } from '../../utils/constants';
 
+import { t } from '../../i18n';
 const ICON_MAP = { Columns2, MessageSquare, Sliders, Users, Target, BarChart2, FileText, ShieldCheck };
 
 export default function Features() {
@@ -25,13 +26,13 @@ export default function Features() {
           className="text-center mb-14"
         >
           <span className="inline-block text-xs font-semibold tracking-widest text-brand-600 uppercase mb-3">
-            Funcionalidades
+            {t('Funcionalidades')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Tudo que você precisa para organizar seus leads
+            {t('Tudo que você precisa para organizar seus leads')}
           </h2>
           <p className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto">
-            Cada funcionalidade foi criada para resolver um problema real do processo comercial — sem complexidade desnecessária.
+            {t('Cada funcionalidade foi criada para resolver um problema real do processo comercial — sem complexidade desnecessária.')}
           </p>
         </motion.div>
 

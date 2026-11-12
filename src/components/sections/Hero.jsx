@@ -7,6 +7,7 @@ import { VIDEOS } from '../media/media';
 import { useOpenDemo } from '../media/DemoContext';
 import { PrimaryCTA, DemoButton } from '../ui/Buttons';
 
+import { t } from '../../i18n';
 const ease = [0.16, 1, 0.3, 1];
 
 export default function Hero() {
@@ -32,7 +33,7 @@ export default function Hero() {
             transition={{ duration: 0.7, ease }}
             className="text-balance font-display text-[2.55rem] font-bold leading-[1.02] tracking-[-0.025em] sm:text-6xl lg:text-[4.4rem] xl:col-span-7 xl:text-[4.6rem]"
           >
-            Seus leads organizados. Suas vendas em movimento.
+            {t('Seus leads organizados. Suas vendas em movimento.')}
           </motion.h1>
 
           <motion.div
@@ -42,16 +43,14 @@ export default function Hero() {
             className="max-w-2xl xl:col-span-5 xl:pb-2"
           >
             <p className="text-pretty text-base leading-relaxed text-white/70 sm:text-lg">
-              O Trativa é um CRM para equipes comerciais: cada lead tem etapa, responsável e
-              histórico, a conversa de WhatsApp fica na ficha e o funil mostra onde as vendas travam.
-              No navegador, no computador e no app Android.
+              {t('O Trativa é um CRM para equipes comerciais: cada lead tem etapa, responsável e histórico, a conversa de WhatsApp fica na ficha e o funil mostra onde as vendas travam. No navegador, no computador e no app Android.')}
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <PrimaryCTA />
               <DemoButton onClick={openDemo} />
             </div>
             <p className="mt-4 text-sm text-white/50">
-              Teste por {TRIAL_DAYS} dias sem cartão de crédito.
+              {t('Teste por')} {TRIAL_DAYS} {t('dias sem cartão de crédito.')}
             </p>
           </motion.div>
         </div>
@@ -62,7 +61,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.35 }}
           className="no-scrollbar mt-12 hidden gap-x-5 gap-y-2 overflow-x-auto text-[13px] text-white/60 md:flex md:flex-wrap"
-          aria-label="Etapas do funil no Trativa"
+          aria-label={t('Etapas do funil no Trativa')}
         >
           {PIPELINE_STAGES.map((s) => (
             <li key={s.key} className="flex items-center gap-2 whitespace-nowrap">
@@ -93,7 +92,7 @@ export default function Hero() {
                   mobile
                   priority
                   sizes="270px"
-                  alt="Ficha de um lead no app Android do Trativa, com etapa, botão de WhatsApp e dados de contato"
+                  alt={t('Ficha de um lead no app Android do Trativa, com etapa, botão de WhatsApp e dados de contato')}
                 />
               </PhoneFrame>
             </div>
@@ -114,7 +113,7 @@ export default function Hero() {
           </div>
 
           <p className="mt-6 text-center text-xs text-gray-500 md:text-right">
-            Gravações e telas reais do Trativa, com dados fictícios de demonstração.
+            {t('Gravações e telas reais do Trativa, com dados fictícios de demonstração.')}
           </p>
         </motion.div>
       </div>

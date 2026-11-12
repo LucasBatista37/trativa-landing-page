@@ -4,6 +4,7 @@ import { PrimaryCTA, DemoButton, PlayStoreBadge } from '../ui/Buttons';
 import Picture from '../media/Picture';
 import { BrowserFrame } from '../media/Frames';
 
+import { t, appUrl } from '../../i18n';
 export default function FinalCTA() {
   const openDemo = useOpenDemo();
   return (
@@ -12,20 +13,19 @@ export default function FinalCTA() {
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-6">
           <h2 id="cta-titulo" className="text-balance font-display text-4xl font-bold leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-[3.5rem]">
-            Comece hoje com os leads que você já tem.
+            {t('Comece hoje com os leads que você já tem.')}
           </h2>
           <p className="mt-5 max-w-lg text-pretty leading-relaxed text-white/70 sm:text-lg">
-            Crie a conta, importe sua planilha e convide a equipe. São {TRIAL_DAYS} dias para testar
-            com o seu processo, sem cartão de crédito.
+            {t('Crie a conta, importe sua planilha e convide a equipe. São')} {TRIAL_DAYS} {t('dias para testar com o seu processo, sem cartão de crédito.')}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <PrimaryCTA size="lg">Criar conta grátis</PrimaryCTA>
+            <PrimaryCTA size="lg">{t('Criar conta grátis')}</PrimaryCTA>
             <DemoButton onClick={openDemo} />
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <PlayStoreBadge />
-            <a href={`${SITE_URL}/login`} className="text-sm text-white/60 underline-offset-4 hover:text-white hover:underline">
-              Já tenho conta: entrar
+            <a href={appUrl(`${SITE_URL}/login`)} className="text-sm text-white/60 underline-offset-4 hover:text-white hover:underline">
+              {t('Já tenho conta: entrar')}
             </a>
           </div>
         </div>

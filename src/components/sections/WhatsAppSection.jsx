@@ -4,14 +4,15 @@ import DemoVideo from '../media/DemoVideo';
 import Picture from '../media/Picture';
 import { VIDEOS } from '../media/media';
 
+import { t } from '../../i18n';
 // Recursos confirmados em backend/src/services/whatsapp*.js e na ficha do lead.
 const features = [
-  { Icon: MessageSquare, text: 'Mensagens enviadas e recebidas aparecem na ficha do lead, na ordem da conversa' },
-  { Icon: UserPlus, text: 'Quem escreve para o seu número pela primeira vez vira lead automaticamente' },
-  { Icon: FileText, text: 'Templates aprovados pela Meta, com variáveis como nome do contato e da empresa' },
-  { Icon: Clock, text: 'Controle da janela de atendimento de 24 horas, para saber quando é preciso usar template' },
-  { Icon: BellRing, text: 'Follow-ups agendados e aviso de nova mensagem nas notificações' },
-  { Icon: Send, text: 'Contato em lote para uma lista filtrada de leads' },
+  { Icon: MessageSquare, text: t('Mensagens enviadas e recebidas aparecem na ficha do lead, na ordem da conversa') },
+  { Icon: UserPlus, text: t('Quem escreve para o seu número pela primeira vez vira lead automaticamente') },
+  { Icon: FileText, text: t('Templates aprovados pela Meta, com variáveis como nome do contato e da empresa') },
+  { Icon: Clock, text: t('Controle da janela de atendimento de 24 horas, para saber quando é preciso usar template') },
+  { Icon: BellRing, text: t('Follow-ups agendados e aviso de nova mensagem nas notificações') },
+  { Icon: Send, text: t('Contato em lote para uma lista filtrada de leads') },
 ];
 
 export default function WhatsAppSection() {
@@ -27,14 +28,13 @@ export default function WhatsAppSection() {
           <div className="min-w-0 lg:col-span-5">
             <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-white/85 ring-1 ring-white/15">
               <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" aria-hidden="true" />
-              WhatsApp Cloud API oficial da Meta
+              {t('WhatsApp Cloud API oficial da Meta')}
             </p>
             <h2 id="whatsapp-titulo" className="mt-5 text-balance font-display text-3xl font-bold tracking-tight sm:text-[2.75rem] sm:leading-[1.08]">
-              O WhatsApp da empresa, dentro do processo de vendas
+              {t('O WhatsApp da empresa, dentro do processo de vendas')}
             </h2>
             <p className="mt-4 text-pretty leading-relaxed text-white/75 sm:text-lg">
-              Conecte o número oficial da empresa e pare de depender do celular de cada vendedor. A
-              conversa fica registrada no lead, junto com a etapa e o histórico.
+              {t('Conecte o número oficial da empresa e pare de depender do celular de cada vendedor. A conversa fica registrada no lead, junto com a etapa e o histórico.')}
             </p>
             <ul className="mt-8 space-y-4">
               {features.map(({ Icon, text }) => (
@@ -47,8 +47,7 @@ export default function WhatsAppSection() {
               ))}
             </ul>
             <p className="mt-8 text-sm text-white/80">
-              Incluído nos planos Pro e Business. Requer um número conectado à WhatsApp Business Platform
-              da Meta.
+              {t('Incluído nos planos Pro e Business. Requer um número conectado à WhatsApp Business Platform da Meta.')}
             </p>
           </div>
 
@@ -59,15 +58,15 @@ export default function WhatsAppSection() {
             <div className="mt-6 grid grid-cols-2 gap-4 sm:gap-6">
               <figure className="min-w-0">
                 <BrowserFrame url="app.trativa.app/modelos">
-                  <Picture name="modelos-whatsapp" sizes="(min-width: 1024px) 330px, 50vw" alt="Lista de modelos de mensagem de WhatsApp no Trativa, com variáveis e contagem de uso" />
+                  <Picture name="modelos-whatsapp" sizes="(min-width: 1024px) 330px, 50vw" alt={t('Lista de modelos de mensagem de WhatsApp no Trativa, com variáveis e contagem de uso')} />
                 </BrowserFrame>
-                <figcaption className="mt-2 text-sm text-white/85">Modelos de mensagem com variáveis</figcaption>
+                <figcaption className="mt-2 text-sm text-white/85">{t('Modelos de mensagem com variáveis')}</figcaption>
               </figure>
               <figure className="min-w-0">
                 <BrowserFrame url="app.trativa.app/leads">
-                  <Picture name="contato-em-lote" sizes="(min-width: 1024px) 330px, 50vw" alt="Janela de contato em lote via WhatsApp no Trativa, com leads filtrados e selecionáveis" />
+                  <Picture name="contato-em-lote" sizes="(min-width: 1024px) 330px, 50vw" alt={t('Janela de contato em lote via WhatsApp no Trativa, com leads filtrados e selecionáveis')} />
                 </BrowserFrame>
-                <figcaption className="mt-2 text-sm text-white/85">Contato em lote para leads filtrados</figcaption>
+                <figcaption className="mt-2 text-sm text-white/85">{t('Contato em lote para leads filtrados')}</figcaption>
               </figure>
             </div>
           </div>
