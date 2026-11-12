@@ -2,38 +2,39 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { AlertCircle, Eye, Layers, TrendingDown } from 'lucide-react';
 
+import { t } from '../../i18n';
 const problems = [
   {
     Icon: AlertCircle,
     iconColor: 'text-red-500',
     iconBg: 'bg-red-50',
-    title: 'Leads que somem',
+    title: t('Leads que somem'),
     description:
-      'Novos contatos chegam pelo WhatsApp, Instagram ou Google Maps e ficam sem follow-up. Quando você lembra, a janela de oportunidade já passou.',
+      t('Novos contatos chegam pelo WhatsApp, Instagram ou Google Maps e ficam sem follow-up. Quando você lembra, a janela de oportunidade já passou.'),
   },
   {
     Icon: Eye,
     iconColor: 'text-orange-500',
     iconBg: 'bg-orange-50',
-    title: 'Sem visibilidade do processo',
+    title: t('Sem visibilidade do processo'),
     description:
-      'Sem um pipeline claro, ninguém sabe em que etapa cada lead está. O gestor precisa perguntar ao vendedor o que está acontecendo.',
+      t('Sem um pipeline claro, ninguém sabe em que etapa cada lead está. O gestor precisa perguntar ao vendedor o que está acontecendo.'),
   },
   {
     Icon: Layers,
     iconColor: 'text-yellow-600',
     iconBg: 'bg-yellow-50',
-    title: 'Contatos espalhados',
+    title: t('Contatos espalhados'),
     description:
-      'Leads no WhatsApp, planilhas, cadernos e e-mails. Quando precisar de um contato ou de um histórico de atendimento, ele simplesmente não está acessível.',
+      t('Leads no WhatsApp, planilhas, cadernos e e-mails. Quando precisar de um contato ou de um histórico de atendimento, ele simplesmente não está acessível.'),
   },
   {
     Icon: TrendingDown,
     iconColor: 'text-violet-500',
     iconBg: 'bg-violet-50',
-    title: 'Sem dados para decidir',
+    title: t('Sem dados para decidir'),
     description:
-      'Qual origem traz mais clientes? Qual vendedor converte mais? Sem métricas reais, decisões importantes viram chute.',
+      t('Qual origem traz mais clientes? Qual vendedor converte mais? Sem métricas reais, decisões importantes viram chute.'),
   },
 ];
 
@@ -54,13 +55,13 @@ export default function Problem() {
           className="text-center mb-14"
         >
           <span className="inline-block text-xs font-semibold tracking-widest text-brand-600 uppercase mb-3">
-            O problema
+            {t('O problema')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Oportunidades que escapam todos os dias
+            {t('Oportunidades que escapam todos os dias')}
           </h2>
           <p className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto">
-            Empresas que não têm um processo comercial organizado perdem leads bons — não por falta de esforço, mas por falta de visibilidade.
+            {t('Empresas que não têm um processo comercial organizado perdem leads bons — não por falta de esforço, mas por falta de visibilidade.')}
           </p>
         </motion.div>
 

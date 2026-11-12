@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS, SITE_URL, TRIAL_DAYS } from '../../utils/constants';
 
+import { t, appUrl, LOCALES, locale, pathFor } from '../../i18n';
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -76,19 +77,20 @@ export default function Header() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+          <LanguageMenu solid={isSolid} />
           <a
-            href={`${SITE_URL}/login`}
+            href={appUrl(`${SITE_URL}/login`)}
             className={`text-sm font-medium transition-colors duration-200 ${
               isSolid ? 'text-gray-600 hover:text-gray-900' : 'text-white/80 hover:text-white'
             }`}
           >
-            Entrar
+            {t('Entrar')}
           </a>
           <a
-            href={`${SITE_URL}/register`}
+            href={appUrl(`${SITE_URL}/register`)}
             className="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-brand-600/25 hover:-translate-y-px"
           >
-            Começar grátis
+            {t('Começar grátis')}
           </a>
         </div>
 
@@ -98,7 +100,7 @@ export default function Header() {
             isSolid ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/10'
           }`}
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-label={mobileOpen ? t('Fechar menu') : t('Abrir menu')}
           aria-expanded={mobileOpen}
           aria-controls="menu-mobile"
         >
@@ -127,18 +129,31 @@ export default function Header() {
                   {link.label}
                 </button>
               ))}
+              <div className="flex justify-center gap-1 pt-2" aria-label={t('Idioma')}>
+                {LOCALES.map((l) => (
+                  <a
+                    key={l.code}
+                    href={pathFor(l.code)}
+                    hrefLang={l.code}
+                    aria-current={l.code === locale ? 'true' : undefined}
+                    className={`px-3 py-2 rounded-lg text-sm ${l.code === locale ? 'font-semibold text-brand-700 bg-brand-50' : 'text-gray-600 hover:bg-gray-50'}`}
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </div>
               <div className="pt-3 border-t border-gray-100 flex flex-col gap-2">
                 <a
-                  href={`${SITE_URL}/login`}
+                  href={appUrl(`${SITE_URL}/login`)}
                   className="block text-center py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
                 >
-                  Entrar na conta
+                  {t('Entrar na conta')}
                 </a>
                 <a
-                  href={`${SITE_URL}/register`}
+                  href={appUrl(`${SITE_URL}/register`)}
                   className="block text-center py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold rounded-lg transition-colors"
                 >
-                  {`Começar grátis — ${TRIAL_DAYS} dias`}
+                  {t('Começar grátis — {TRIAL_DAYS} dias', { TRIAL_DAYS })}
                 </a>
               </div>
             </div>
@@ -146,5 +161,29 @@ export default function Header() {
         )}
       </AnimatePresence>
     </motion.header>
+  );
+}
+
+/** Seletor de idioma (PT · EN · ES) do cabeçalho no computador. */
+function LanguageMenu({ solid }) {
+  return (
+    <div className={`flex items-center rounded-lg text-xs font-semibold ${solid ? 'text-gray-500' : 'text-white/70'}`} aria-label={t('Idioma')}>
+      {LOCALES.map((l) => (
+        <a
+          key={l.code}
+          href={pathFor(l.code)}
+          hrefLang={l.code}
+          title={l.label}
+          aria-current={l.code === locale ? 'true' : undefined}
+          className={`px-2 py-1.5 rounded-md transition-colors ${
+            l.code === locale
+              ? (solid ? 'text-brand-700 bg-brand-50' : 'text-white bg-white/15')
+              : (solid ? 'hover:text-gray-900 hover:bg-gray-100' : 'hover:text-white hover:bg-white/10')
+          }`}
+        >
+          {l.short}
+        </a>
+      ))}
+    </div>
   );
 }

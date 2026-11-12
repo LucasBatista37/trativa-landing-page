@@ -1,36 +1,37 @@
 import { Plus } from 'lucide-react';
 import { TRIAL_DAYS } from '../../utils/constants';
 
+import { t } from '../../i18n';
 // Respostas conferidas no código: authController (trial), emailService (retenção),
 // leadImportService (CSV), páginas legais de cancelamento e o app Android 1.7.0.
 export const FAQ_ITEMS = [
   {
-    q: 'Como funciona o teste grátis?',
-    a: `São ${TRIAL_DAYS} dias com os limites do plano Starter: 2 usuários, 200 leads, 3 metas, 3 campos personalizados e 3 projetos. Não pedimos cartão de crédito. Se você não assinar um plano até o fim do teste, o acesso é suspenso e nada é cobrado.`,
+    q: t('Como funciona o teste grátis?'),
+    a: t('São {TRIAL_DAYS} dias com os limites do plano Starter: 2 usuários, 200 leads, 3 metas, 3 campos personalizados e 3 projetos. Não pedimos cartão de crédito. Se você não assinar um plano até o fim do teste, o acesso é suspenso e nada é cobrado.', { TRIAL_DAYS }),
   },
   {
-    q: 'O que acontece com os meus dados se o teste acabar?',
-    a: 'A conta fica suspensa até a assinatura ser ativada, e os dados ficam preservados por 30 dias. Ao assinar, você continua de onde parou.',
+    q: t('O que acontece com os meus dados se o teste acabar?'),
+    a: t('A conta fica suspensa até a assinatura ser ativada, e os dados ficam preservados por 30 dias. Ao assinar, você continua de onde parou.'),
   },
   {
-    q: 'Preciso da API oficial do WhatsApp para usar o Trativa?',
-    a: 'Não. Sem a integração, você monta a mensagem a partir de um modelo e abre a conversa no WhatsApp com um clique. Para enviar e receber mensagens dentro da ficha do lead, conecte um número à WhatsApp Business Platform (Cloud API) da Meta, recurso dos planos Pro e Business.',
+    q: t('Preciso da API oficial do WhatsApp para usar o Trativa?'),
+    a: t('Não. Sem a integração, você monta a mensagem a partir de um modelo e abre a conversa no WhatsApp com um clique. Para enviar e receber mensagens dentro da ficha do lead, conecte um número à WhatsApp Business Platform (Cloud API) da Meta, recurso dos planos Pro e Business.'),
   },
   {
-    q: 'Tem aplicativo para celular?',
-    a: 'Sim, para Android, no Google Play. No iPhone, o Trativa funciona pelo navegador, com layout próprio para telas pequenas. Também há app para computador (Windows, macOS e Linux).',
+    q: t('Tem aplicativo para celular?'),
+    a: t('Sim, para Android, no Google Play. No iPhone, o Trativa funciona pelo navegador, com layout próprio para telas pequenas. Também há app para computador (Windows, macOS e Linux).'),
   },
   {
-    q: 'Consigo trazer os leads da minha planilha?',
-    a: 'Sim. Importe um arquivo CSV (há um modelo pronto para baixar), confira a prévia com válidos, inválidos e duplicados, e só então confirme. Também dá para enviar leads por API a partir de outra ferramenta.',
+    q: t('Consigo trazer os leads da minha planilha?'),
+    a: t('Sim. Importe um arquivo CSV (há um modelo pronto para baixar), confira a prévia com válidos, inválidos e duplicados, e só então confirme. Também dá para enviar leads por API a partir de outra ferramenta.'),
   },
   {
-    q: 'Como funciona o acesso da equipe?',
-    a: 'Há três papéis: proprietário, administrador e colaborador. O colaborador vê e edita os leads atribuídos a ele e os que estão sem responsável. Convites são enviados por e-mail, e você escolhe a quais projetos cada pessoa tem acesso.',
+    q: t('Como funciona o acesso da equipe?'),
+    a: t('Há três papéis: proprietário, administrador e colaborador. O colaborador vê e edita os leads atribuídos a ele e os que estão sem responsável. Convites são enviados por e-mail, e você escolhe a quais projetos cada pessoa tem acesso.'),
   },
   {
-    q: 'Posso cancelar quando quiser?',
-    a: 'Sim. O cancelamento é feito em Configurações → Cobrança → Gerenciar assinatura. O acesso continua até o último dia do ciclo já pago.',
+    q: t('Posso cancelar quando quiser?'),
+    a: t('Sim. O cancelamento é feito em Configurações → Cobrança → Gerenciar assinatura. O acesso continua até o último dia do ciclo já pago.'),
   },
 ];
 
@@ -40,12 +41,12 @@ export default function FAQ() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <h2 id="faq-titulo" className="text-balance font-display text-3xl font-bold tracking-tight text-gray-900 sm:text-[2.75rem] sm:leading-[1.08]">
-            Perguntas frequentes
+            {t('Perguntas frequentes')}
           </h2>
           <p className="mt-4 text-gray-600">
-            Não achou sua dúvida? Escreva para{' '}
+            {t('Não achou sua dúvida? Escreva para')}{' '}
             <a href="mailto:suporte@trativa.com.br" className="font-medium text-brand-700 underline underline-offset-2 hover:text-brand-800">
-              suporte@trativa.com.br
+              {t('suporte@trativa.com.br')}
             </a>
             .
           </p>

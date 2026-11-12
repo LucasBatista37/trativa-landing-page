@@ -1,11 +1,12 @@
 import { ArrowRight, Play } from 'lucide-react';
 import { PLAY_STORE_URL, SITE_URL } from '../../utils/constants';
 
-export function PrimaryCTA({ children = 'Começar grátis', className = '', size = 'md' }) {
+import { t, appUrl } from '../../i18n';
+export function PrimaryCTA({ children = t('Começar grátis'), className = '', size = 'md' }) {
   const pad = size === 'lg' ? 'px-7 py-4 text-base' : 'px-5 py-3 text-sm sm:text-base';
   return (
     <a
-      href={`${SITE_URL}/register`}
+      href={appUrl(`${SITE_URL}/register`)}
       className={`group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-brand-600 font-semibold text-white shadow-[0_8px_24px_-8px_rgba(37,99,235,0.7)] transition hover:bg-brand-500 active:translate-y-px ${pad} ${className}`}
     >
       {children}
@@ -28,7 +29,7 @@ export function DemoButton({ onClick, dark = true, className = '' }) {
       <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${dark ? 'bg-white text-ink' : 'bg-ink text-white'}`}>
         <Play className="h-3 w-3 translate-x-px fill-current" aria-hidden="true" />
       </span>
-      Ver demonstração
+      {t('Ver demonstração')}
     </button>
   );
 }
@@ -40,7 +41,7 @@ export function PlayStoreBadge({ className = '' }) {
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center gap-3 rounded-xl bg-black px-4 py-2.5 text-white ring-1 ring-white/15 transition hover:bg-gray-900 ${className}`}
-      aria-label="Baixar o app Trativa no Google Play (abre em nova aba)"
+      aria-label={t('Baixar o app Trativa no Google Play (abre em nova aba)')}
     >
       <svg viewBox="0 0 24 24" className="h-7 w-7 flex-shrink-0" fill="none" aria-hidden="true">
         <path d="M2.69 22.86c.43.29.92.29 1.34.05L16.43 15.15L13.34 12L2.69 22.86Z" fill="#34A853" />
@@ -49,7 +50,7 @@ export function PlayStoreBadge({ className = '' }) {
         <path d="M4.03 1.08C3.61 0.84 3.12 0.84 2.69 1.13L13.34 12L16.43 8.85L4.03 1.08Z" fill="#EA4335" />
       </svg>
       <span className="flex flex-col text-left leading-none">
-        <span className="text-[10px] text-gray-400">Disponível no</span>
+        <span className="text-[10px] text-gray-400">{t('Disponível no')}</span>
         <span className="text-sm font-semibold">Google Play</span>
       </span>
     </a>

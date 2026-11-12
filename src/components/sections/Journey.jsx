@@ -5,6 +5,7 @@ import Picture from '../media/Picture';
 import DemoVideo from '../media/DemoVideo';
 import { VIDEOS } from '../media/media';
 
+import { t } from '../../i18n';
 /*
  * Do primeiro contato à venda: 5 etapas em sequência.
  * Cada etapa usa a cor da etapa equivalente do funil no app.
@@ -12,36 +13,36 @@ import { VIDEOS } from '../media/media';
 const STEPS = [
   {
     color: '#3b82f6',
-    title: 'O lead entra',
-    text: 'Cadastre na mão, importe uma planilha CSV com revisão antes de gravar, envie pela API ou deixe o WhatsApp oficial criar o lead quando alguém escreve para o seu número. Duplicados por telefone, e-mail e Instagram são detectados.',
+    title: t('O lead entra'),
+    text: t('Cadastre na mão, importe uma planilha CSV com revisão antes de gravar, envie pela API ou deixe o WhatsApp oficial criar o lead quando alguém escreve para o seu número. Duplicados por telefone, e-mail e Instagram são detectados.'),
     url: 'app.trativa.app/leads',
     media: { type: 'video', video: VIDEOS.importacao },
   },
   {
     color: '#8b5cf6',
-    title: 'Ganha lugar no pipeline',
-    text: 'Cada lead cai em uma das 9 etapas, com responsável e projeto. A equipe vê o mesmo quadro, e cada colaborador trabalha nos leads dele e nos que ainda estão sem responsável.',
+    title: t('Ganha lugar no pipeline'),
+    text: t('Cada lead cai em uma das 9 etapas, com responsável e projeto. A equipe vê o mesmo quadro, e cada colaborador trabalha nos leads dele e nos que ainda estão sem responsável.'),
     url: 'app.trativa.app/leads',
-    media: { type: 'img', name: 'leads-kanban', alt: 'Pipeline Kanban do Trativa com leads nas colunas Novo, Em atendimento, Contatado e Interessado' },
+    media: { type: 'img', name: 'leads-kanban', alt: t('Pipeline Kanban do Trativa com leads nas colunas Novo, Em atendimento, Contatado e Interessado') },
   },
   {
     color: '#10b981',
-    title: 'É acompanhado de perto',
-    text: 'Na ficha ficam o contato, a conversa de WhatsApp, as observações e o histórico de tudo o que aconteceu, com quem fez e quando.',
+    title: t('É acompanhado de perto'),
+    text: t('Na ficha ficam o contato, a conversa de WhatsApp, as observações e o histórico de tudo o que aconteceu, com quem fez e quando.'),
     url: 'app.trativa.app/leads/mercado-bom-preco',
-    media: { type: 'img', name: 'lead-historico', alt: 'Histórico de ações de um lead no Trativa, com mudanças de status, atribuição de responsável e mensagem de WhatsApp' },
+    media: { type: 'img', name: 'lead-historico', alt: t('Histórico de ações de um lead no Trativa, com mudanças de status, atribuição de responsável e mensagem de WhatsApp') },
   },
   {
     color: '#6366f1',
-    title: 'Avança no funil',
-    text: 'Arraste o card para a próxima etapa. A mudança fica registrada no histórico e conta para as metas do vendedor.',
+    title: t('Avança no funil'),
+    text: t('Arraste o card para a próxima etapa. A mudança fica registrada no histórico e conta para as metas do vendedor.'),
     url: 'app.trativa.app/leads',
     media: { type: 'video', video: VIDEOS.heroKanban },
   },
   {
     color: '#059669',
-    title: 'Vira resultado que dá para medir',
-    text: 'O gestor acompanha o funil geral, por vendedor e por origem, e vê em que passagem os leads mais se perdem.',
+    title: t('Vira resultado que dá para medir'),
+    text: t('O gestor acompanha o funil geral, por vendedor e por origem, e vê em que passagem os leads mais se perdem.'),
     url: 'app.trativa.app/funil',
     media: { type: 'video', video: VIDEOS.funil },
   },
@@ -82,10 +83,10 @@ export default function Journey() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="max-w-2xl">
           <h2 id="jornada-titulo" className="text-balance font-display text-3xl font-bold tracking-tight text-gray-900 sm:text-[2.75rem] sm:leading-[1.08]">
-            Do primeiro contato à venda
+            {t('Do primeiro contato à venda')}
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-gray-600 sm:text-lg">
-            O caminho de um lead dentro do Trativa, em cinco passos.
+            {t('O caminho de um lead dentro do Trativa, em cinco passos.')}
           </p>
         </div>
 
@@ -111,7 +112,7 @@ export default function Journey() {
                   </span>
                   <div>
                     <h3 className={`font-display text-xl font-bold tracking-tight transition-colors duration-300 sm:text-2xl ${active === i ? 'text-gray-900' : 'text-gray-900 lg:text-gray-500'}`}>
-                      <span className="sr-only">Passo {i + 1}: </span>{s.title}
+                      <span className="sr-only">{t('Passo')} {i + 1}: </span>{s.title}
                     </h3>
                     <p className={`mt-2 max-w-md text-pretty leading-relaxed transition-colors duration-300 ${active === i ? 'text-gray-600' : 'text-gray-600 lg:text-gray-500'}`}>{s.text}</p>
                   </div>

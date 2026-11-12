@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { LANDING_URL } from '../utils/constants';
+import { t, basename, ogLocale, LOCALES } from '../i18n';
 
 const setMeta = (selector, attr, value) => {
   if (!value) return;
@@ -15,6 +16,22 @@ const setCanonical = (url) => {
     document.head.appendChild(link);
   }
   link.setAttribute('href', url);
+};
+
+// <link rel="alternate" hreflang> para as versões pt/en/es da mesma página.
+const setAlternates = (path, on) => {
+  document.head.querySelectorAll('link[data-hreflang]').forEach((l) => l.remove());
+  if (!on) return;
+  const rest = path === '/' ? '/' : path;
+  const entries = [...LOCALES.map((l) => [l.code === 'pt-BR' ? 'pt-BR' : l.code, `${LANDING_URL}${l.prefix}${rest === '/' && l.prefix ? '' : rest}`]), ['x-default', `${LANDING_URL}${rest}`]];
+  for (const [lang, href] of entries) {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', lang);
+    link.setAttribute('href', href);
+    link.setAttribute('data-hreflang', '1');
+    document.head.appendChild(link);
+  }
 };
 
 const setJsonLd = (jsonLd) => {
@@ -39,9 +56,11 @@ export default function SEO({
   robots = 'index, follow',
   image = `${LANDING_URL}/og-trativa-simple-system.png`,
   jsonLd,
+  alternates = false,
 }) {
   useEffect(() => {
-    const url = `${LANDING_URL}${path === '/' ? '/' : path}`;
+    const url = `${LANDING_URL}${basename}${path === '/' ? (basename ? '' : '/') : path}`;
+    setAlternates(path, alternates);
 
     document.title = title;
     setCanonical(url);
@@ -57,18 +76,18 @@ export default function SEO({
     setMeta('meta[property="og:image:width"]', 'content', '1200');
     setMeta('meta[property="og:image:height"]', 'content', '630');
     setMeta('meta[property="og:image:type"]', 'content', 'image/png');
-    setMeta('meta[property="og:image:alt"]', 'content', 'Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real');
+    setMeta('meta[property="og:image:alt"]', 'content', t('Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real'));
     setMeta('meta[property="og:site_name"]', 'content', 'Trativa');
-    setMeta('meta[property="og:locale"]', 'content', 'pt_BR');
+    setMeta('meta[property="og:locale"]', 'content', ogLocale);
 
     setMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
     setMeta('meta[name="twitter:title"]', 'content', title);
     setMeta('meta[name="twitter:description"]', 'content', description);
     setMeta('meta[name="twitter:image"]', 'content', image);
-    setMeta('meta[name="twitter:image:alt"]', 'content', 'Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real');
+    setMeta('meta[name="twitter:image:alt"]', 'content', t('Trativa — CRM para organizar leads, WhatsApp oficial e relatórios em tempo real'));
 
     setJsonLd(jsonLd);
-  }, [description, image, jsonLd, path, robots, title, type]);
+  }, [alternates, description, image, jsonLd, path, robots, title, type]);
 
   return null;
 }

@@ -1,30 +1,31 @@
 import { Link } from 'react-router-dom';
 import { SITE_URL } from '../../utils/constants';
 
+import { t, appUrl, locale, basename } from '../../i18n';
 const FOOTER_SECTIONS = [
   {
-    title: 'Produto',
+    title: t('Produto'),
     links: [
-      { label: 'Conheça o produto', href: '#produto' },
-      { label: 'Como funciona', href: '#how-it-works' },
-      { label: 'Integração WhatsApp', href: '#whatsapp' },
-      { label: 'Celular e computador', href: '#celular' },
-      { label: 'Planos e preços', href: '#pricing' },
-      { label: 'Perguntas frequentes', href: '#faq' },
-      { label: 'Blog', to: '/blog' },
-      { label: 'App para computador', to: '/download' },
-      { label: 'App Android', href: 'https://play.google.com/store/apps/details?id=app.trativa' },
+      { label: t('Conheça o produto'), href: '#produto' },
+      { label: t('Como funciona'), href: '#how-it-works' },
+      { label: t('Integração WhatsApp'), href: '#whatsapp' },
+      { label: t('Celular e computador'), href: '#celular' },
+      { label: t('Planos e preços'), href: '#pricing' },
+      { label: t('Perguntas frequentes'), href: '#faq' },
+      { label: t('Blog'), to: '/blog', href: '/blog' },
+      { label: t('App para computador'), to: '/download' },
+      { label: t('App Android'), href: 'https://play.google.com/store/apps/details?id=app.trativa' },
     ],
   },
   {
-    title: 'Conta',
+    title: t('Conta'),
     links: [
-      { label: 'Criar conta', href: `${SITE_URL}/register` },
-      { label: 'Fazer login', href: `${SITE_URL}/login` },
+      { label: t('Criar conta'), href: appUrl(`${SITE_URL}/register`) },
+      { label: t('Fazer login'), href: appUrl(`${SITE_URL}/login`) },
     ],
   },
   {
-    title: 'Suporte',
+    title: t('Suporte'),
     links: [
       { label: 'suporte@trativa.com.br', href: 'mailto:suporte@trativa.com.br' },
     ],
@@ -32,10 +33,10 @@ const FOOTER_SECTIONS = [
 ];
 
 const LEGAL_LINKS = [
-  { label: 'Política de Privacidade', to: '/privacidade' },
-  { label: 'Termos de Uso', to: '/termos' },
-  { label: 'Cancelamento', to: '/cancelamento' },
-  { label: 'Reembolso', to: '/reembolso' },
+  { label: t('Política de Privacidade'), to: '/privacidade' },
+  { label: t('Termos de Uso'), to: '/termos' },
+  { label: t('Cancelamento'), to: '/cancelamento' },
+  { label: t('Reembolso'), to: '/reembolso' },
 ];
 
 export default function Footer() {
@@ -73,7 +74,7 @@ export default function Footer() {
               <span className="font-display text-white font-bold text-lg tracking-tight">Trativa</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
-              CRM de leads feito para equipes comerciais brasileiras. Organize seus contatos, acompanhe o funil e feche mais negócios.
+              {t('CRM de leads feito para equipes comerciais brasileiras. Organize seus contatos, acompanhe o funil e feche mais negócios.')}
             </p>
           </div>
 
@@ -84,7 +85,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {section.links.map(link => (
                   <li key={link.label}>
-                    {link.to ? (
+                    {link.to && !(locale !== 'pt-BR' && link.to === '/blog') ? (
                       <Link
                         to={link.to}
                         onClick={scrollToTop}
@@ -111,18 +112,25 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-ink-line pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-400">
-            © 2026 Trativa. Todos os direitos reservados.
+            {t('© 2026 Trativa. Todos os direitos reservados.')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             {LEGAL_LINKS.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={scrollToTop}
-                className="text-xs text-gray-400 hover:text-gray-200 transition-colors"
-              >
-                {link.label}
-              </Link>
+              // Páginas legais existem só em português.
+              locale === 'pt-BR' ? (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={scrollToTop}
+                  className="text-xs text-gray-400 hover:text-gray-200 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a key={link.to} href={link.to} hrefLang="pt-BR" className="text-xs text-gray-400 hover:text-gray-200 transition-colors">
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
         </div>

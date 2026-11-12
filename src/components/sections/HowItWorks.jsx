@@ -2,34 +2,35 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { UserPlus, Layout, MessageSquare, BarChart2 } from 'lucide-react';
 
+import { t } from '../../i18n';
 const steps = [
   {
     Icon: UserPlus,
     number: '01',
-    title: 'Cadastre ou importe seus leads',
+    title: t('Cadastre ou importe seus leads'),
     description:
-      'Adicione leads manualmente, importe uma planilha CSV ou deixe o WhatsApp criar automaticamente quando alguém entrar em contato com seu número.',
+      t('Adicione leads manualmente, importe uma planilha CSV ou deixe o WhatsApp criar automaticamente quando alguém entrar em contato com seu número.'),
   },
   {
     Icon: Layout,
     number: '02',
-    title: 'Organize pelo pipeline visual',
+    title: t('Organize pelo pipeline visual'),
     description:
-      'Arraste cada lead pelo funil de 9 etapas. Use a visualização Kanban, tabela ou cards — conforme o momento do seu processo comercial.',
+      t('Arraste cada lead pelo funil de 9 etapas. Use a visualização Kanban, tabela ou cards — conforme o momento do seu processo comercial.'),
   },
   {
     Icon: MessageSquare,
     number: '03',
-    title: 'Entre em contato pelo WhatsApp',
+    title: t('Entre em contato pelo WhatsApp'),
     description:
-      'Envie mensagens diretamente do CRM via WhatsApp oficial. Use templates aprovados ou escreva na hora. Receba respostas no mesmo lugar.',
+      t('Envie mensagens diretamente do CRM via WhatsApp oficial. Use templates aprovados ou escreva na hora. Receba respostas no mesmo lugar.'),
   },
   {
     Icon: BarChart2,
     number: '04',
-    title: 'Acompanhe resultados e metas',
+    title: t('Acompanhe resultados e metas'),
     description:
-      'Veja relatórios de conversão, identifique gargalos no funil, monitore metas por vendedor e tome decisões com dados reais.',
+      t('Veja relatórios de conversão, identifique gargalos no funil, monitore metas por vendedor e tome decisões com dados reais.'),
   },
 ];
 
@@ -50,13 +51,13 @@ export default function HowItWorks() {
           className="text-center mb-16"
         >
           <span className="inline-block text-xs font-semibold tracking-widest text-brand-600 uppercase mb-3">
-            Como funciona
+            {t('Como funciona')}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Do primeiro contato à conversão em 4 passos
+            {t('Do primeiro contato à conversão em 4 passos')}
           </h2>
           <p className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto">
-            Configure o Trativa em minutos e tenha um processo comercial organizado funcionando no mesmo dia.
+            {t('Configure o Trativa em minutos e tenha um processo comercial organizado funcionando no mesmo dia.')}
           </p>
         </motion.div>
 
