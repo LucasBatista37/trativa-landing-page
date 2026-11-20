@@ -149,7 +149,10 @@ for (const post of BLOG_POSTS) {
     .map(
       (s) =>
         `<section><h2>${esc(s.heading)}</h2>${(s.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join('')}` +
-        (s.items ? `<ul>${s.items.map((i) => `<li>${esc(typeof i === 'string' ? i : i.text || i.title || '')}</li>`).join('')}</ul>` : '') +
+        [s.bullets, s.checklist?.items || s.checklist, s.items]
+          .filter(Array.isArray)
+          .map((list) => `<ul>${list.map((i) => `<li>${esc(typeof i === 'string' ? i : i.text || i.label || i.title || '')}</li>`).join('')}</ul>`)
+          .join('') +
         `</section>`,
     )
     .join('');
